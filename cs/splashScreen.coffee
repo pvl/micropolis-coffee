@@ -1,8 +1,8 @@
 
-define ['Game', 'MapGenerator', 'SplashCanvas'], (Game, MapGenerator, SplashCanvas) ->
+define ['Game', 'mapGenerator', 'SplashCanvas'], (Game, mapGenerator, SplashCanvas) ->
     class SplashScreen
         constructor: (@tileSet, @spriteSheet) ->
-            @map = MapGenerator()
+            @map = mapGenerator()
             $('#splashGenerate').click(@regenerateMap.bind(this));
             $('#splashPlay').click(@playMap.bind(this));
             $('.awaitGeneration').toggle();
@@ -11,7 +11,7 @@ define ['Game', 'MapGenerator', 'SplashCanvas'], (Game, MapGenerator, SplashCanv
 
         regenerateMap: ->
             @splashCanvas.clearMap()
-            @map = MapGenerator()
+            @map = mapGenerator()
             @splashCanvas.paint(@map)
 
         playMap: ->

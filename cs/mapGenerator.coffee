@@ -1,6 +1,6 @@
 
 define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, Tile) ->
-    TERRAIN_CREATE_ISLAND;
+    TERRAIN_CREATE_ISLAND = 0;
     TERRAIN_TREE_LEVEL = -1;
     TERRAIN_LAKE_LEVEL = -1;
     TERRAIN_CURVE_LEVEL = 0;
