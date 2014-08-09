@@ -5,7 +5,7 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
         yDelta = [0, -8, -6, 0, 6, 8,  6, 0, -6, 0, 0, 0]
 
         constructor: (map, spriteManager, x, y) ->
-            @init SpriteConstants.SPRITE_AIRPLANE, map, spriteManager, x, y
+            @init(SpriteConstants.SPRITE_AIRPLANE, map, spriteManager, x, y)
             @width = 48
             @weight = 48
             @xOffset = -24
@@ -30,11 +30,11 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
                         frame = 3
                     @frame = frame
                 else
-                    d = SpriteUtils.getDir @x, @y, @destX, @destY
-                    frame = SpriteUtils.turnTo frame, d
+                    d = SpriteUtils.getDir(@x, @y, @destX, @destY)
+                    frame = SpriteUtils.turnTo(frame, d)
                     @frame = frame
 
-            absDist = SpriteUtils.absoluteDistance @x, @y, @destX, @destY
+            absDist = SpriteUtils.absoluteDistance(@x, @y, @destX, @destY)
             if absDist < 50
                 # We're pretty close to the destination
                 @destX = Random.getRandom(SpriteUtils.worldToPix(@map.width)) + 8
@@ -53,7 +53,7 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
                         s.explodeSprite messageManager
                         explode = true
 
-                @explodeSprite messageManager if explode
+                @explodeSprite(messageManager) if explode
             @x += xDelta[frame]
             @y += yDelta[frame]
 
@@ -61,8 +61,8 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
 
         explodeSprite: (messageManager) ->
             @frame = 0
-            @spriteManager.makeExplosionAt @x, @y
-            messageManager.sendMessage Messages.PLANE_CRASHED
+            @spriteManager.makeExplosionAt(@x, @y)
+            messageManager.sendMessage(Messages.PLANE_CRASHED)
 
     # Metadata for image loading (PVL FIXME)
     Object.defineProperties(AirplaneSprite,
