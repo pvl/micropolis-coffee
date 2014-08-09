@@ -6,18 +6,24 @@ define ['MouseBox', 'TileSet'], (MouseBox, TileSet) ->
         @DEFAULT_ID: "SplashCanvas"
 
         constructor: (id, parentNode) ->
+            if not (this instanceof SplashCanvas)
+                return new SplashCanvas id, parentNode
+
+            if arguments.length < 1
+                throw new Error 'Invalid parameter'
+
             if typeof parentNode == 'string'
                 orig = parentNode
                 parentNode = $('#' + parentNode)
                 if parentNode.length == 0
-                    parentNode = parentNode[0]
-                else
                     throw new Error 'Node ' + orig + ' not found'
+                else
+                    parentNode = parentNode[0]
 
             @_canvas = document.createElement 'canvas'
             @_canvas.id = id
-            @_canvas.width = @DEFAULT_WIDTH
-            @_canvas.height = @DEFAULT_HEIGHT
+            @_canvas.width = SplashCanvas.DEFAULT_WIDTH
+            @_canvas.height = SplashCanvas.DEFAULT_HEIGHT
             #Remove any existing element with the same id
             current = document.getElementById id
             if current != null

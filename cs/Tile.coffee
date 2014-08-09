@@ -9,7 +9,7 @@ define [], () ->
         # code. One could also have the map then track zones, so that populationDensityScan no longer
         # needs to perform another full map scan.
         constructor: (tileValue, bitMask) ->
-            if not this instance of Tile
+            if not this instanceof Tile
                 return new Tile()
 
             if arguments.length and
