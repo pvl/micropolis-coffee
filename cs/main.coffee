@@ -1,4 +1,3 @@
-
 require ['splashScreen', 'SpriteLoader', 'TileSet', 'TileSetURI'], (SplashScreen, SpriteLoader, TileSet, TileSetURI) ->
 
     i = null
