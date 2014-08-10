@@ -102,7 +102,7 @@ define ['Tile', 'TileUtils'], (Tile, TileUtils) ->
                         if tile != Tile.HPOWER and tile != Tile.HROADPOWER and tile != Tile.RAILHPOWERV
                             adjTile |= 2
 
-                else if y < this._map.height - 1
+                else if y < @_map.height - 1
                     tile = @_worldEffects.getTile(x, y + 1)
                     if tile.isConductive()
                         tile = TileUtils.normalizeRoad(tile.getValue())
@@ -124,7 +124,7 @@ define ['Tile', 'TileUtils'], (Tile, TileUtils) ->
                 @fixSingle(x, y - 1)
             if x < @_map.width - 1
                 @fixSingle(x + 1, y)
-            if y < this._map.height - 1
+            if y < @_map.height - 1
                 @fixSingle(x, y + 1)
             if x > 0
                 @fixSingle(x - 1, y)

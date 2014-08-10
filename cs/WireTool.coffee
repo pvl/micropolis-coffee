@@ -29,7 +29,7 @@ define ['BaseTool', 'Connector', 'Tile', 'TileUtils','MiscUtils'], (BaseTool, Co
                                 break
 
                     if y < @_map.height - 1
-                        tile = @_worldEffects.getTile(x, y + 1);
+                        tile = @_worldEffects.getTile(x, y + 1)
                         if tile.isConductive()
                             tile = TileUtils.normalizeRoad(tile.getValue())
                             if tile != Tile.VROADPOWER and tile != Tile.RAILVPOWERH and tile != Tile.VPOWER

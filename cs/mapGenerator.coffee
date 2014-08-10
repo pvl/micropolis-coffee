@@ -1,10 +1,10 @@
 
 define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, Tile) ->
-    TERRAIN_CREATE_ISLAND = 0;
-    TERRAIN_TREE_LEVEL = -1;
-    TERRAIN_LAKE_LEVEL = -1;
-    TERRAIN_CURVE_LEVEL = 0;
-    ISLAND_RADIUS = 18;
+    TERRAIN_CREATE_ISLAND = 0
+    TERRAIN_TREE_LEVEL = -1
+    TERRAIN_LAKE_LEVEL = -1
+    TERRAIN_CURVE_LEVEL = 0
+    ISLAND_RADIUS = 18
 
     generateMap = (w,h) ->
         w = w or 120
@@ -223,8 +223,8 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
 
     doSRiver = (map, riverPos, riverDir, terrainDir) ->
         if TERRAIN_CURVE_LEVEL < 0
-            rate1 = 100;
-            rate2 = 200;
+            rate1 = 100
+            rate2 = 200
         else
             rate1 = TERRAIN_CURVE_LEVEL + 10
             rate2 = TERRAIN_CURVE_LEVEL + 100

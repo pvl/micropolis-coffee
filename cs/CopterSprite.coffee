@@ -60,8 +60,8 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
             @y += yDelta[frame]
 
         explodeSprite: (messageManager) ->
-            @frame = 0;
-            @spriteManager.makeExplosionAt(@x, @y);
+            @frame = 0
+            @spriteManager.makeExplosionAt(@x, @y)
             messageManager.sendMessage(Messages.HELICOPTER_CRASHED)
 
         # Metadata for image loading - PVL FIXME

@@ -18,7 +18,7 @@ define ['BaseTool', 'Connector', 'Tile', 'TileUtils','MiscUtils'], (BaseTool, Co
                         tile = @_worldEffects.getTileValue(x + 1, y)
                         tile = TileUtils.normalizeRoad(tile)
                         if tile == Tile.VRAILROAD or tile == Tile.HBRIDGE or (tile >= Tile.ROADS and tile <= Tile.HROADPOWER)
-                            @_worldEffects.setTile(x, y, Tile.HBRIDGE, Tile.BULLBIT);
+                            @_worldEffects.setTile(x, y, Tile.HBRIDGE, Tile.BULLBIT)
                             break
 
                     if x > 0
@@ -32,14 +32,14 @@ define ['BaseTool', 'Connector', 'Tile', 'TileUtils','MiscUtils'], (BaseTool, Co
                         tile = @_worldEffects.getTileValue(x, y + 1)
                         tile = TileUtils.normalizeRoad(tile)
                         if tile == Tile.HRAILROAD or tile == Tile.VROADPOWER or (tile >= Tile.VBRIDGE and tile <= Tile.INTERSECTION)
-                            @_worldEffects.setTile(x, y, Tile.VBRIDGE, Tile.BULLBIT);
+                            @_worldEffects.setTile(x, y, Tile.VBRIDGE, Tile.BULLBIT)
                             break
 
                     if y > 0
                         tile = @_worldEffects.getTileValue(x, y - 1)
                         tile = TileUtils.normalizeRoad(tile)
                         if tile == Tile.HRAILROAD or tile == Tile.VROADPOWER or (tile >= Tile.VBRIDGE and tile <= Tile.INTERSECTION)
-                            @_worldEffects.setTile(x, y, Tile.VBRIDGE, Tile.BULLBIT);
+                            @_worldEffects.setTile(x, y, Tile.VBRIDGE, Tile.BULLBIT)
                             break
 
                     return @TOOLRESULT_FAILED
@@ -61,7 +61,7 @@ define ['BaseTool', 'Connector', 'Tile', 'TileUtils','MiscUtils'], (BaseTool, Co
 
             @addCost(cost)
             @checkZoneConnections(x, y)
-            return this.TOOLRESULT_OK
+            return @TOOLRESULT_OK
 
         doTool: (x, y, messageManager, blockMaps) ->
             @result = @layRoad(x, y)

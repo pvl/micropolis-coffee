@@ -36,7 +36,7 @@ define [], ->
             return dir if dir == @INVALID
             if not count and count != 0
                 count = 1
-            return ((dir - this.NORTH + count) & 7) + this.NORTH
+            return ((dir - @NORTH + count) & 7) + @NORTH
 
         # Move direction clockwise by 90 degrees, taking the direction modulo 8
         # if necessary to force it into valid bounds. Has no effect on INVALID.

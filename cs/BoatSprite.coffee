@@ -22,9 +22,9 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
             else if x >= SpriteUtils.worldToPix(map.width - 4)
                 @frame = 7
             else if y < SpriteUtils.worldToPix(4)
-                @frame = 5;
+                @frame = 5
             else if y >= SpriteUtils.worldToPix(map.height - 4)
-                @frame = 1;
+                @frame = 1
             else
                 @frame = 3
 

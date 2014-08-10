@@ -18,7 +18,7 @@ define ['BaseTool', 'Connector', 'Tile', 'TileUtils','MiscUtils'], (BaseTool, Co
                     if dx == 1
                         if dy == 1
                             tileFlags |= Tile.ZONEBIT
-                        else if dy == 2 and this.animated
+                        else if dy == 2 and @animated
                             tileFlags |= Tile.ANIMBIT
                     @_worldEffects.setTile(posX, posY, tileValue, tileFlags)
                     baseTile++
