@@ -66,8 +66,8 @@ define ['Random', 'Tile', 'TileUtils', 'Traffic', 'ZoneUtils'], (Random, Tile, T
 
         # Occasionally assess and perhaps modify the tile
         if Random.getChance(7)
-            locationScore = evalCommercial(simData.blockMaps, x, y, trafficOK);
-            zoneScore = simData.valves.comValve + locationScore;
+            locationScore = evalCommercial(simData.blockMaps, x, y, trafficOK)
+            zoneScore = simData.valves.comValve + locationScore
 
             zoneScore = -500 if not zonePower
 
