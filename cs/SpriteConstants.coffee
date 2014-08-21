@@ -11,4 +11,4 @@ define ['MiscUtils'], (MiscUtils) ->
             SPRITE_EXPLOSION: MiscUtils.makeConstantDescriptor(7)
         })
 
-  return SpriteConstants
+    return SpriteConstants

@@ -46,7 +46,7 @@ define ['MiscUtils', 'Tile'], (MiscUtils, Tile) ->
                 result = {zoneSize: 0, deltaX: 0, deltaY: 0}
         return result
 
-    checkZoneSize: (tileValue) ->
+    checkZoneSize = (tileValue) ->
         if (tileValue >= Tile.RESBASE - 1 and tileValue <= Tile.PORTBASE - 1) or
            (tileValue >= Tile.LASTPOWERPLANT + 1 and tileValue <= Tile.POLICESTATION + 4) or
            (tileValue >= Tile.CHURCH1BASE and tileValue <= Tile.CHURCH7LAST)

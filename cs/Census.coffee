@@ -18,8 +18,8 @@ define ['MiscUtils'], (MiscUtils) ->
             for topic in topics
                 name10 = topic + 'Hist10'
                 name120 = topic + 'Hist120'
-                @[name10] = createArray()
-                @[name120] = createArray()
+                @[name10] = @createArray()
+                @[name120] = @createArray()
 
         createArray: ->
             new_array = []

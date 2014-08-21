@@ -24,17 +24,17 @@ define ['MiscUtils'], (MiscUtils) ->
                 blockSize: MiscUtils.makeConstantDescriptor(blockSize),
                 defaultValue: MiscUtils.makeConstantDescriptor(defaultValue)})
 
-            this.data = []
+            @data = []
 
             if (sourceMap)
                 @copyFrom(sourceMap, sourceFunction)
             else
-                this.clear()
+                @clear()
 
         copyFrom: (sourceMap, sourceFn) ->
             mapFn = (elem) -> sourceFn(elem)
             for y in [0...sourceMap.data.length]
-                this.data[y] = sourceMap.data[y].map(mapFn)
+                @data[y] = sourceMap.data[y].map(mapFn)
             return null
 
         makeArrayOf: (length, value) ->
@@ -44,18 +44,18 @@ define ['MiscUtils'], (MiscUtils) ->
             return result
 
         clear: ->
-            maxY = Math.floor(this.mapHeight / this.blockSize) + 1
-            maxX = Math.floor(this.mapWidth / this.blockSize) + 1
+            maxY = Math.floor(@mapHeight / @blockSize) + 1
+            maxX = Math.floor(@mapWidth / @blockSize) + 1
             for y in [0...maxY]
-                this.data[y] = @makeArrayOf(maxX, this.defaultValue)
+                @data[y] = @makeArrayOf(maxX, @defaultValue)
 
-        get: (x, y) -> this.data[y][x]
+        get: (x, y) -> @data[y][x]
 
-        set: (x, y, value) -> data[y][x] = value
+        set: (x, y, value) -> @data[y][x] = value
 
-        toBlock: (num) -> Math.floor(num / this.blockSize)
+        toBlock: (num) -> Math.floor(num / @blockSize)
 
-        worldGet: (x, y) -> this.get(this.toBlock(x), this.toBlock(y))
+        worldGet: (x, y) -> @get(@toBlock(x), @toBlock(y))
 
-        worldSet: (x, y, value) -> this.set(this.toBlock(x), this.toBlock(y), value)
+        worldSet: (x, y, value) -> @set(@toBlock(x), @toBlock(y), value)
 

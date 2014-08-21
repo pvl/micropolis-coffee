@@ -14,6 +14,9 @@ define ['Random', 'Tile'], (Random, Tile) ->
     isCommercial = unwrapTile (tile) ->
         tile >= Tile.COMBASE and tile < Tile.INDBASE
 
+    isCommercialZone = (tile) ->
+        tile.isZone() and isCommercial(tile)
+
     isDriveable = unwrapTile (tile) ->
         (tile >= Tile.ROADBASE and tile <= Tile.LASTRAIL) or
         tile == Tile.RAILPOWERV or tile == Tile.RAILPOWERH

@@ -1,5 +1,5 @@
 define [], ->
-    MouseBox
+    MouseBox =
         draw: (c, pos, width, height, options) ->
             lineWidth = options.lineWidth or 3.0
             strokeStyle = options.colour or 'yellow'

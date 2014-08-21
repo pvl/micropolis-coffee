@@ -1,14 +1,16 @@
 define [], ->
-    constructor: ->
-        this.data = []
 
-    sendMessage: (message, data) ->
-        this.data.push({message: message, data: data})
+    class MessageManager
+        constructor: ->
+            this.data = []
 
-    clear: () ->
-        this.data = []
+        sendMessage: (message, data) ->
+            this.data.push({message: message, data: data})
 
-    getMessages: () ->
-        this.data.slice()
+        clear: () ->
+            this.data = []
+
+        getMessages: () ->
+            this.data.slice()
 
 

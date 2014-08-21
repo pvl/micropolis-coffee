@@ -34,7 +34,7 @@ define ['GameCanvas', 'GameTools'], (GameCanvas, GameTools) ->
 
     class InputStatus
         constructor: (map) ->
-            @gameTools = new GameTools(map)
+            @gameTools = GameTools(map)
 
             @canvasID = canvasID
 
@@ -71,22 +71,22 @@ define ['GameCanvas', 'GameTools'], (GameCanvas, GameTools) ->
             $(document).keydown(keyDownHandler.bind(this))
             $(document).keyup(keyUpHandler.bind(this))
 
-            $(@canvasID).on('mouseenter', mouseEnterHandler.bind(this))
-            $(@canvasID).on('mouseleave', mouseLeaveHandler.bind(this))
+            $(@canvasID).on('mouseenter', @mouseEnterHandler)
+            $(@canvasID).on('mouseleave', @mouseLeaveHandler)
 
-            $('.toolButton').click(toolButtonHandler.bind(this))
+            $('.toolButton').click(@toolButtonHandler)
 
-            $('#budgetRequest').click(@budgetHandler.bind(this))
-            $('#evalRequest').click(@evalHandler.bind(this))
-            $('#disasterRequest').click(@disasterHandler.bind(this))
-            $('#pauseRequest').click(@speedChangeHandler.bind(this))
+            $('#budgetRequest').click(@budgetHandler)
+            $('#evalRequest').click(@evalHandler)
+            $('#disasterRequest').click(@disasterHandler)
+            $('#pauseRequest').click(@speedChangeHandler)
 
         clickHandled: ->
             @clickX = -1
             @clickY = -1
             @currentTool.clear()
 
-        getRelativeCoordinates: ->
+        getRelativeCoordinates: (e) ->
             if e.x != undefined and e.y != undefined
                 x = e.x
                 y = e.y
@@ -99,28 +99,28 @@ define ['GameCanvas', 'GameTools'], (GameCanvas, GameTools) ->
             y -= canvas.offsetTop
             return {x: x, y: y}
 
-        mouseEnterHandler: (e) ->
-            $(@canvasID).on('mousemove', mouseMoveHandler.bind(this))
-            $(@canvasID).on('click', canvasClickHandler.bind(this))
+        mouseEnterHandler: (e) =>
+            $(@canvasID).on('mousemove', @mouseMoveHandler)
+            $(@canvasID).on('click', @canvasClickHandler)
 
-        mouseLeaveHandler: (e) ->
+        mouseLeaveHandler: (e) =>
             $(@canvasID).off('mousemove')
             $(@canvasID).off('click')
 
             @mouseX = -1
             @mouseY = -1
 
-        mouseMoveHandler: (e) ->
-            coords = getRelativeCoordinates(e)
+        mouseMoveHandler: (e) =>
+            coords = @getRelativeCoordinates(e)
             @mouseX = coords.x
             @mouseY = coords.y
 
-        canvasClickHandler: (e) ->
+        canvasClickHandler: (e) =>
             @clickX = @mouseX
             @clickY = @mouseY
             e.preventDefault()
 
-        toolButtonHandler: (e) ->
+        toolButtonHandler: (e) =>
             # Remove highlight from last tool button
             $('.selected').each ->
                 $(this).removeClass('selected')
@@ -137,31 +137,31 @@ define ['GameCanvas', 'GameTools'], (GameCanvas, GameTools) ->
 
             e.preventDefault()
 
-        speedChangeHandled: ->
+        speedChangeHandled: =>
             @speedChangeRequested = false
             @requestedSpeed = null
 
-        speedChangeHandler: (e) ->
+        speedChangeHandler: (e) =>
             @speedChangeRequested = true
             requestedSpeed = $('#pauseRequest').text()
             newRequest = if requestedSpeed == 'Pause' then 'Play' else 'Pause'
             $('#pauseRequest').text(newRequest)
 
-        disasterHandler: (e) ->
+        disasterHandler: (e) =>
             @disasterRequested = true
 
-        disasterHandled: (e) ->
+        disasterHandled: (e) =>
             @disasterRequested = false
 
-        evalHandler: (e) ->
+        evalHandler: (e) =>
             @evalRequested = true
 
-        evalHandled: (e) ->
+        evalHandled: (e) =>
             @evalRequested = false
 
-        budgetHandler: (e) ->
+        budgetHandler: (e) =>
             @budgetRequested = true
 
-        budgetHandled: (e) ->
+        budgetHandled: (e) =>
             @budgetRequested = false
 
