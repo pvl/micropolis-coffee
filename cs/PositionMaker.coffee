@@ -16,8 +16,8 @@ define ['Direction'], (Direction) ->
         class Position
             constructor: (pos, deltaX, deltaY) ->
                 if arguments.length == 0
-                    this.x = 0
-                    this.y = 0
+                    @x = 0
+                    @y = 0
                     return this
 
                 # This overloaded constructor accepts the following parameters
@@ -39,65 +39,65 @@ define ['Direction'], (Direction) ->
                 moveOK = true
                 if isNumber(pos)
                     # Coordinates
-                    this.x = pos
-                    this.y = deltaX
+                    @x = pos
+                    @y = deltaX
                 else
-                    this._assignFrom(pos)
+                    @_assignFrom(pos)
 
                     if arguments.length == 2
-                        moveOK = this.move(deltaX)
+                        moveOK = @move(deltaX)
                     else if arguments.length == 3
-                        this.x += deltaX
-                        this.y += deltaY
-                if this.x < 0 or this.x >= width or this.y < 0 or this.y >= height or not moveOK
+                        @x += deltaX
+                        @y += deltaY
+                if @x < 0 or @x >= width or @y < 0 or @y >= height or not moveOK
                     throw new Error('Invalid parameter')
 
             _assignFrom: (from) ->
-                this.x = from.x
-                this.y = from.y
+                @x = from.x
+                @y = from.y
 
-            toString: -> "(#{this.x},#{this.y})"
+            toString: -> "(#{@x},#{@y})"
 
-            toInt: -> this.y * width + this.x
+            toInt: -> @y * width + @x
 
             move: (dir) ->
                 switch dir
                     when Direction.INVALID
                         return true
                     when Direction.NORTH
-                        if this.y > 0
-                            this.y--
+                        if @y > 0
+                            @y--
                             return true
                     when Direction.NORTHEAST
-                        if this.y > 0 and this.x < width - 1
-                            this.y--
-                            this.x++
+                        if @y > 0 and @x < width - 1
+                            @y--
+                            @x++
                             return true
                     when Direction.EAST
-                        if this.x < width - 1
-                            this.x++
+                        if @x < width - 1
+                            @x++
                             return true
                     when Direction.SOUTHEAST
-                        if this.y < height - 1 and this.x < width - 1
-                            this.x++
-                            this.y++
+                        if @y < height - 1 and @x < width - 1
+                            @x++
+                            @y++
                             return true
                     when Direction.SOUTH
-                        if this.y < height - 1
-                            this.y++
+                        if @y < height - 1
+                            @y++
                             return true
                     when Direction.SOUTHWEST
-                        if this.y < height - 1 and this.x > 0
-                            this.y++
-                            this.x--
+                        if @y < height - 1 and @x > 0
+                            @y++
+                            @x--
                             return true
                     when Direction.WEST
-                        if this.x > 0
-                            this.x--
+                        if @x > 0
+                            @x--
                             return true
                     when Direction.NORTHWEST
-                        if this.y > 0 and this.x > 0
-                            this.y--
-                            this.x--
+                        if @y > 0 and @x > 0
+                            @y--
+                            @x--
                             return true
                 return false
