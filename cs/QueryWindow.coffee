@@ -22,12 +22,12 @@ define [], ->
             opacityLayer = $(@_opacityLayer)
             opacityLayer = if opacityLayer.length == 0 then null else opacityLayer
             if opacityLayer == null
-                throw new Error('Node ' + orig + ' not found')
+                throw new Error("Node #{orig} not found")
 
             queryWindow = $(@_queryWindowID)
             queryWindow = if queryWindow.length == 0 then null else queryWindow
             if queryWindow == null
-                throw new Error('Node ' + orig + ' not found')
+                throw new Error("Node #{orig} not found")
 
             opacityLayer.toggle()
             queryWindow.toggle()
