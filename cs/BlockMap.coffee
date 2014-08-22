@@ -35,7 +35,7 @@ define ['MiscUtils'], (MiscUtils) ->
             mapFn = (elem) -> sourceFn(elem)
             for y in [0...sourceMap.data.length]
                 @data[y] = sourceMap.data[y].map(mapFn)
-            return null
+            return
 
         makeArrayOf: (length, value) ->
             result = []

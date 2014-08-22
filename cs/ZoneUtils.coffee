@@ -83,7 +83,7 @@ define ['MiscUtils', 'Tile'], (MiscUtils, Tile) ->
                     continue
                 if map.getTileValue(xTem, yTem >= Tile.ROADBASE)
                     map.addTileFlags(xTem, yTem, Tile.BULLBIT)
-        return null
+        return
 
     getLandPollutionValue = (blockMaps, x, y) ->
         landValue = blockMaps.landValueMap.worldGet(x, y)
