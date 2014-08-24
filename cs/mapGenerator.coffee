@@ -12,53 +12,58 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
 
         TERRAIN_CREATE_ISLAND = Random.getRandom(2) - 1
 
-        map = new GameMap w,h
+        map = new GameMap(w,h)
         #Construct land
         if TERRAIN_CREATE_ISLAND < 0
             if Random.getRandom(100) < 10
-                makeIsland map
+                makeIsland(map)
                 return map
 
         if TERRAIN_CREATE_ISLAND == 1
-            makeNakedIsland map
+            makeNakedIsland(map)
         else
-            clearMap map
+            clearMap(map)
         #Lay a river
         if TERRAIN_CURVE_LEVEL != 0
             terrainXStart = 40 + Random.getRandom(map.width - 80)
             terrainYStart = 33 + Random.getRandom(map.height - 67)
-            terrainPos = new map.Position terrainXStart, terrainYStart
-            doRivers map, terrainPos
+            terrainPos = new map.Position(terrainXStart, terrainYStart)
+            doRivers(map, terrainPos)
         #Lay a few lakes
         if TERRAIN_LAKE_LEVEL != 0
-            makeLakes map
+            makeLakes(map)
 
-        smoothRiver map
+        smoothRiver(map)
         #And add trees
         if TERRAIN_TREE_LEVEL != 0
-            doTrees map
+            doTrees(map)
 
         return map
 
     clearMap = (map) ->
         for x in [0...map.width]
             for y in [0...map.height]
-                tileValue = map.getTileValue x,y
+                map.setTo(x,y,new Tile(Tile.DIRT))
+
+    clearUnnatural = (map) ->
+        for x in [0...map.width]
+            for y in [0...map.height]
+                tileValue = map.getTileValue(x,y)
                 if tileValue > Tile.WOODS
-                    map.setTo x,y,new Tile(Tile.DIRT)
+                    map.setTo(x,y,new Tile(Tile.DIRT))
 
     makeNakedIsland = (map) ->
         terrainIslandRadius = ISLAND_RADIUS
         for x in [0...map.width]
             for y in [0...map.height]
                 if x < 5 or x >= map.width-5 or y < 5 or y >= map.height-5
-                    map.setTo x,y,new Tile(Tile.RIVER)
+                    map.setTo(x,y,new Tile(Tile.RIVER))
                 else
-                    map.setTo x,y,new Tile(Tile.DIRT)
+                    map.setTo(x,y,new Tile(Tile.DIRT))
 
         for x in [0...(map.width-5)] by 2
             mapY = Random.getERandom terrainIslandRadius
-            plopBRiver map, new map.Position(x,mapY)
+            plopBRiver(map, new map.Position(x,mapY))
             mapY = map.height - 10 - Random.getERandom(terrainIslandRadius)
             plopBRiver map, new map.Position(x, mapY)
 
@@ -66,17 +71,17 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
             plopSRiver map, new map.Position(x, map.height - 6)
 
         for y in [0...(map.height-5)] by 2
-            mapX = Random.getERandom terrainIslandRadius
-            plopBRiver map, new map.Position(mapX, y)
+            mapX = Random.getERandom(terrainIslandRadius)
+            plopBRiver(map, new map.Position(mapX, y))
             mapX = map.width - 10 - Random.getERandom(terrainIslandRadius)
-            plopBRiver map, new map.Position(mapX, y)
-            plopSRiver map, new map.Position(0, y)
-            plopSRiver map, new map.Position(map.width - 6, y)
+            plopBRiver(map, new map.Position(mapX, y))
+            plopSRiver(map, new map.Position(0, y))
+            plopSRiver(map, new map.Position(map.width - 6, y))
 
     makeIsland = (map) ->
-        makeNakedIsland map
-        smoothRiver map
-        doTrees map
+        makeNakedIsland(map)
+        smoothRiver(map)
+        doTrees(map)
 
     makeLakes = (map) ->
         if TERRAIN_LAKE_LEVEL < 0
@@ -86,17 +91,17 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
         while numLakes > 0
             x = Random.getRandom(map.width - 21) + 10
             y = Random.getRandom(map.height - 20) + 10
-            makeSingleLake map, new map.Position(x, y)
+            makeSingleLake(map, new map.Position(x, y))
             numLakes--
 
     makeSingleLake = (map, pos) ->
         numPlops = Random.getRandom(12) + 2
         while numPlops > 0
-            plopPos = new map.Position pos, Random.getRandom(12)-6, Random.getRandom(12)-6
+            plopPos = new map.Position(pos, Random.getRandom(12)-6, Random.getRandom(12)-6)
             if Random.getRandom(4)
-                plopSRiver map, plopPos
+                plopSRiver(map, plopPos)
             else
-                plopBRiver map, plopPos
+                plopBRiver(map, plopPos)
             numPlops--
 
     treeSplash = (map, x, y) ->
@@ -113,7 +118,7 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
             if not map.testBounds(treePos.x, treePos.y)
                 return
             if map.getTileValue(treePos) == Tile.DIRT
-                map.setTo treePos, new Tile(Tile.WOODS, Tile.BLBNBIT)
+                map.setTo(treePos, new Tile(Tile.WOODS, Tile.BLBNBIT))
             numTrees--
 
     doTrees = (map) ->
@@ -124,9 +129,9 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
         for x in [0...amount]
             xloc = Random.getRandom(map.width - 1)
             yloc = Random.getRandom(map.height - 1)
-            treeSplash map, xloc, yloc
-        smoothTrees map
-        smoothTrees map
+            treeSplash(map, xloc, yloc)
+        smoothTrees(map)
+        smoothTrees(map)
 
     smoothRiver = (map) ->
         dx = [-1,  0,  1,  0]
@@ -153,7 +158,7 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
                     temp = riverEdges[bitIndex & 15]
                     if temp != Tile.RIVER and Random.getRandom(1)
                         temp++
-                    map.setTo x, y, new Tile(temp)
+                    map.setTo(x, y, new Tile(temp))
 
     isTree = (tileValue) ->
         tileValue >= Tile.WOODS_LOW and tileValue <= Tile.WOODS_HIGH
@@ -162,7 +167,7 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
         for x in [0...map.width]
             for y in [0...map.height]
                 if isTree(map.getTileValue(x, y))
-                    smoothTreesAt map, x, y, false
+                    smoothTreesAt(map, x, y, false)
 
     smoothTreesAt = (map, x, y, preserve) ->
         dx = [-1,  0,  1,  0 ]
@@ -188,10 +193,10 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
         if temp
             if temp != Tile.WOODS and ((x+y) & 1)
                 temp = temp - 8
-            map.setTo x, y, new Tile(temp, Tile.BLBNBIT)
+            map.setTo(x, y, new Tile(temp, Tile.BLBNBIT))
         else
             if not preserve
-                map.setTo x, y, new Tile(temp)
+                map.setTo(x, y, new Tile(temp))
 
     doRivers = (map, terrainPos) ->
         riverDir = Direction.NORTH + Random.getRandom(3) * 2
@@ -208,17 +213,17 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
         else
             rate1 = TERRAIN_CURVE_LEVEL + 10
             rate2 = TERRAIN_CURVE_LEVEL + 100
-        pos = new map.Position riverPos
+        pos = new map.Position(riverPos)
         while map.testBounds(pos.x + 4, pos.y + 4)
-            plopBRiver map, pos
+            plopBRiver(map, pos)
             if Random.getRandom(rate1) < 10
                 terrainDir = riverDir
             else
                 if Random.getRandom(rate2) > 90
-                    terrainDir = Direction.rotate45 terrainDir
+                    terrainDir = Direction.rotate45(terrainDir)
                 if Random.getRandom(rate2) > 90
-                    terrainDir = Direction.rotate45 terrainDir, 7
-            pos.move terrainDir
+                    terrainDir = Direction.rotate45(terrainDir, 7)
+            pos.move(terrainDir)
         return terrainDir
 
     doSRiver = (map, riverPos, riverDir, terrainDir) ->
@@ -229,17 +234,17 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
             rate1 = TERRAIN_CURVE_LEVEL + 10
             rate2 = TERRAIN_CURVE_LEVEL + 100
 
-        pos = new map.Position riverPos
+        pos = new map.Position(riverPos)
         while map.testBounds(pos.x + 3, pos.y + 3)
-            plopSRiver map, pos
+            plopSRiver(map, pos)
             if Random.getRandom(rate1) < 10
                 terrainDir = riverDir
             else
                 if Random.getRandom(rate2) > 90
-                    terrainDir = Direction.rotate45 terrainDir
+                    terrainDir = Direction.rotate45(terrainDir)
                 if Random.getRandom(rate2) > 90
-                    terrainDir = Direction.rotate45 terrainDir, 7
-            pos.move terrainDir
+                    terrainDir = Direction.rotate45(terrainDir, 7)
+            pos.move(terrainDir)
         return terrainDir
 
     putOnMap = (map, newVal, x, y) ->
@@ -247,14 +252,14 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
             return
         if not map.testBounds(x, y)
             return
-        tileValue = map.getTileValue x, y
+        tileValue = map.getTileValue(x, y)
         if tileValue != Tile.DIRT
             if tileValue == Tile.RIVER
                 if newVal != Tile.CHANNEL
                     return
             if tileValue == Tile.CHANNEL
                 return
-        map.setTo x, y, new Tile(newVal)
+        map.setTo(x, y, new Tile(newVal))
 
     plopBRiver = (map, pos) ->
         BRMatrix = [
@@ -270,7 +275,7 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
 
         for x in [0...9]
             for y in [0...9]
-                putOnMap map, BRMatrix[y][x], pos.x + x, pos.y + y
+                putOnMap(map, BRMatrix[y][x], pos.x + x, pos.y + y)
 
     plopSRiver = (map, pos) ->
         SRMatrix = [
@@ -283,51 +288,52 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
 
         for x in [0...6]
             for y in [0...6]
-                putOnMap map, SRMatrix[y][x], pos.x + x, pos.y + y
+                putOnMap(map, SRMatrix[y][x], pos.x + x, pos.y + y)
 
     smoothWater = (map) ->
         for x in [0...map.width]
             for y in [0...map.height]
-                tile = map.getTileValue x, y
+                tile = map.getTileValue(x, y)
                 if tile >= Tile.WATER_Tile.LOW and tile <= Tile.WATER_Tile.HIGH
-                    pos = new map.Position x, y
+                    pos = new map.Position(x, y)
 
                     for dir in [Direction.BEGIN...Direction.END] by Direction.increment90(dir)
-                        tile = map.getTileFromMap pos, dir, Tile.WATER_LOW
+                        tile = map.getTileFromMap(pos, dir, Tile.WATER_LOW)
 
                         # If nearest object is not water:
                         if tile < Tile.WATER_LOW or tile > Tile.WATER_HIGH
-                            map.setTo x, y, new Tile(Tile.REDGE) #set river edge
+                            map.setTo(x, y, new Tile(Tile.REDGE)) #set river edge
                             break #Continue with next tile
 
         for x in [0...map.width]
             for y in [0...map.height]
-                tile = map.getTileValue x, y
+                tile = map.getTileValue(x, y)
 
                 if tile != Tile.CHANNEL or tile >= Tile.WATER_LOW or tile <= Tile.WATER_HIGH
                     makeRiver = true
 
-                    pos = new map.Position x, y
+                    pos = new map.Position(x, y)
                     for dir in [Direction.BEGIN...Direction.END] by Direction.increment90(dir)
-                        tile = map.getTileFromMap pos, dir, Tile.WATER_LOW
+                        tile = map.getTileFromMap(pos, dir, Tile.WATER_LOW)
 
                         if tile < Tile.WATER_LOW or tile > Tile.WATER_HIGH
                             makeRiver = false
                             break
 
-                    map.setTo(x, y, new Tile(Tile.RIVER)) if makeRiver
+                    if makeRiver
+                        map.setTo(x, y, new Tile(Tile.RIVER))
 
         for x in [0...map.width]
             for y in [0...map.height]
-                tile = map.getTileValue x, y
+                tile = map.getTileValue(x, y)
 
-        if tile >= Tile.WOODS_LOW and tile <= Tile.WOODS_HIGH
-            pos = new map.Position x, y
-            for dir in [Direction.BEGIN...Direction.END] by Direction.increment90(dir)
-                tile = map.getTileFromMap pos, dir, TILE_INVALID
+                if tile >= Tile.WOODS_LOW and tile <= Tile.WOODS_HIGH
+                    pos = new map.Position(x, y)
+                    for dir in [Direction.BEGIN...Direction.END] by Direction.increment90(dir)
+                        tile = map.getTileFromMap(pos, dir, TILE_INVALID)
 
-                if tile == Tile.RIVER or tile == Tile.CHANNEL
-                    map.setTo x, y, new Tile(Tile.REDGE) #make it water's edge
-                    break
+                        if tile == Tile.RIVER or tile == Tile.CHANNEL
+                            map.setTo(x, y, new Tile(Tile.REDGE)) #make it water's edge
+                            break
 
     return generateMap
