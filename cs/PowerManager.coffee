@@ -53,7 +53,7 @@ define ['BlockMap', 'Direction', 'Messages', 'Tile'], (BlockMap, Direction, Mess
                 while true
                     powerConsumption++
                     if powerConsumption > maxPower
-                        messageManager.sendMessage(Messages.NOT_ENOUGH_POWER);
+                        messageManager.sendMessage(Messages.NOT_ENOUGH_POWER)
                         return
                     if anyDir != Direction.INVALID
                         pos.move(anyDir)
@@ -71,12 +71,12 @@ define ['BlockMap', 'Direction', 'Messages', 'Tile'], (BlockMap, Direction, Mess
                         break
 
         coalPowerFound: (map, x, y, simData) =>
-            simData.census.coalPowerPop += 1;
-            @_powerStack.push(new map.Position(x, y));
+            simData.census.coalPowerPop += 1
+            @_powerStack.push(new map.Position(x, y))
 
             # Ensure animation runs
-            dX = [-1, 2, 1, 2];
-            dY = [-1, -1, 0, 0];
+            dX = [-1, 2, 1, 2]
+            dY = [-1, -1, 0, 0]
 
             for i in [0...4]
                 map.addTileFlags(x + dX[i], y + dY[i], Tile.ANIMBIT)

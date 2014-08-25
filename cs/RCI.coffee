@@ -65,8 +65,8 @@ define ['MiscUtils'], (MiscUtils) ->
             if index > 1
                 value = Math.floor(2000/1500 * value)
 
-            colours = ['rgb(0,255,0)', 'rgb(0, 0, 139)', 'rgb(255, 255, 0)'];
-            barHeightRect = Math.floor(Math.abs(value) / this._scale);
+            colours = ['rgb(0,255,0)', 'rgb(0, 0, 139)', 'rgb(255, 255, 0)']
+            barHeightRect = Math.floor(Math.abs(value) / this._scale)
             barStartY = if (value >= 0)
                 this._buckets + this._padding - barHeightRect
               else

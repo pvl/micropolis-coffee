@@ -24,7 +24,7 @@ define ['Text'], (Text) ->
                 throw new Error("Node #{orig} not found")
 
             evaluationWindow = $(@_evaluationWindowID)
-            evaluationWindow = if evaluationWindow.length == 0 then null else evaluationWindow;
+            evaluationWindow = if evaluationWindow.length == 0 then null else evaluationWindow
             if evaluationWindow == null
                 throw new Error("Node #{orig} not found")
 
