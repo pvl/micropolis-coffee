@@ -65,10 +65,10 @@ define ['Direction', 'GameMap', 'Random', 'Tile'], (Direction, GameMap, Random, 
             mapY = Random.getERandom terrainIslandRadius
             plopBRiver(map, new map.Position(x,mapY))
             mapY = map.height - 10 - Random.getERandom(terrainIslandRadius)
-            plopBRiver map, new map.Position(x, mapY)
+            plopBRiver(map, new map.Position(x, mapY))
 
-            plopSRiver map, new map.Position(x, 0)
-            plopSRiver map, new map.Position(x, map.height - 6)
+            plopSRiver(map, new map.Position(x, 0))
+            plopSRiver(map, new map.Position(x, map.height - 6))
 
         for y in [0...(map.height-5)] by 2
             mapX = Random.getERandom(terrainIslandRadius)
