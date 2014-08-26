@@ -56,7 +56,7 @@ define ['Direction', 'MiscUtils', 'PositionMaker', 'Tile'], (Direction, MiscUtil
                 x = x.x
             if not @testBounds(x, y) then throw e
             tileIndex = @_calculateIndex(x, y)
-            if not (tileIndex in @_data)
+            if not (tileIndex of @_data)
                 @_data[tileIndex] = new Tile(@defaultValue)
             return @_data[tileIndex]
 
@@ -79,7 +79,7 @@ define ['Direction', 'MiscUtils', 'PositionMaker', 'Tile'], (Direction, MiscUtil
                 res[a-y] = []
                 for b in [x...(x + w)]
                     tileIndex = @_calculateIndex(b, a)
-                    if not (tileIndex in @_data)
+                    if not (tileIndex of @_data)
                         @_data[tileIndex] = new Tile(@defaultValue)
                     res[a-y].push(@_data[tileIndex])
             return res
@@ -114,7 +114,7 @@ define ['Direction', 'MiscUtils', 'PositionMaker', 'Tile'], (Direction, MiscUtil
                 x = x.x
             if not @testBounds(x, y) then throw e
             tileIndex = @_calculateIndex(x, y)
-            if not (tileIndex in @_data)
+            if not (tileIndex of @_data)
                 @_data[tileIndex] = new Tile(@defaultValue)
             @_data[tileIndex].set(value, flags)
 
@@ -188,3 +188,5 @@ define ['Direction', 'MiscUtils', 'PositionMaker', 'Tile'], (Direction, MiscUtil
                     else
                         @setTo(x, y, new Tile(tile, Tile.BNCNBIT))
                     tile += 1
+
+
