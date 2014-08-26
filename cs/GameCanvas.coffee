@@ -4,8 +4,8 @@ define ['AnimationManager', 'GameMap', 'MouseBox', 'Tile', 'TileSet'], \
     class GameCanvas
 
         @DEFAULT_WIDTH = 600
-        @GameCanvas.DEFAULT_HEIGHT = 400
-        @GameCanvas.DEFAULT_ID = "MicropolisCanvas"
+        @DEFAULT_HEIGHT = 400
+        @DEFAULT_ID = "MicropolisCanvas"
 
         constructor: (id, parentNode, width, height) ->
             if not (this instanceof GameCanvas)
@@ -57,6 +57,7 @@ define ['AnimationManager', 'GameMap', 'MouseBox', 'Tile', 'TileSet'], \
                 parentNode.appendChild(@_canvas)
 
             @ready = false
+
 
 
         init: (map, tileSet, spriteSheet) ->
