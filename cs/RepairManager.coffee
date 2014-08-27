@@ -18,13 +18,13 @@ define ['Tile'], (Tile) ->
                 for xx in [-1...(zoneSize - 1)]
                     tileValue++
 
-                current = @_map.getTile(x + xx, y + yy)
-                if current.isZone() or current.isAnimated()
-                    continue
+                    current = @_map.getTile(x + xx, y + yy)
+                    if current.isZone() or current.isAnimated()
+                        continue
 
-                currentValue = current.getValue()
-                if currentValue < Tile.RUBBLE or currentValue >= Tile.ROADBASE
-                    @_map.setTo(x + xx, y + yy, new Tile(tileValue, Tile.CONDBIT | Tile.BURNBIT))
+                    currentValue = current.getValue()
+                    if currentValue < Tile.RUBBLE or currentValue >= Tile.ROADBASE
+                        @_map.setTo(x + xx, y + yy, new Tile(tileValue, Tile.CONDBIT | Tile.BURNBIT))
 
         checkTile: (x, y, cityTime) ->
             for i in [0...@_actions.length]
