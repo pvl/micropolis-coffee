@@ -1,20 +1,20 @@
 define ['AirplaneSprite', 'BoatSprite', 'CopterSprite', 'ExplosionSprite', 'Messages', 'MiscUtils', 'MonsterSprite', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile', 'TornadoSprite', 'TrainSprite'], \
   (AirplaneSprite, BoatSprite, CopterSprite, ExplosionSprite, Messages, MiscUtils, MonsterSprite, Random, SpriteConstants, SpriteUtils, Tile, TornadoSprite, TrainSprite) ->
 
-    constructors = {}
-    constructors[SpriteConstants.SPRITE_TRAIN] = TrainSprite
-    constructors[SpriteConstants.SPRITE_SHIP] = BoatSprite
-    constructors[SpriteConstants.SPRITE_MONSTER] = MonsterSprite
-    constructors[SpriteConstants.SPRITE_HELICOPTER] = CopterSprite
-    constructors[SpriteConstants.SPRITE_AIRPLANE] = AirplaneSprite
-    constructors[SpriteConstants.SPRITE_TORNADO] = TornadoSprite
-    constructors[SpriteConstants.SPRITE_EXPLOSION] = ExplosionSprite
-
     class SpriteManager
+
         constructor: (map) ->
             @spriteList = []
             @map = map
             @spriteCycle = 0
+            @constructors = {}
+            @constructors[SpriteConstants.SPRITE_TRAIN] = TrainSprite
+            @constructors[SpriteConstants.SPRITE_SHIP] = BoatSprite
+            @constructors[SpriteConstants.SPRITE_MONSTER] = MonsterSprite
+            @constructors[SpriteConstants.SPRITE_HELICOPTER] = CopterSprite
+            @constructors[SpriteConstants.SPRITE_AIRPLANE] = AirplaneSprite
+            @constructors[SpriteConstants.SPRITE_TORNADO] = TornadoSprite
+            @constructors[SpriteConstants.SPRITE_EXPLOSION] = ExplosionSprite
 
         getSprite: (type) ->
             filteredList = @spriteList.filter (s) ->
@@ -52,7 +52,7 @@ define ['AirplaneSprite', 'BoatSprite', 'CopterSprite', 'ExplosionSprite', 'Mess
             @pruneDeadSprites()
 
         makeSprite: (type, x, y) ->
-            @spriteList.push(new constructors[type](@map, this, x, y))
+            @spriteList.push(new @constructors[type](@map, this, x, y))
 
         makeTornado: (messageManager) ->
             sprite = @getSprite(SpriteConstants.SPRITE_TORNADO)

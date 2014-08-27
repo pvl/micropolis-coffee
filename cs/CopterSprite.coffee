@@ -4,6 +4,11 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
     yDelta = [0, -5, -3, 0, 3, 5, 3, 0, -3]
 
     class CopterSprite extends BaseSprite
+
+        @ID: MiscUtils.makeConstantDescriptor(2)
+        @width: MiscUtils.makeConstantDescriptor(32)
+        @frames: MiscUtils.makeConstantDescriptor(8)
+
         constructor: (map, spriteManager, x, y) ->
             @init(SpriteConstants.SPRITE_HELICOPTER, map, spriteManager, x, y)
             @width = 32
@@ -64,8 +69,3 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
             @spriteManager.makeExplosionAt(@x, @y)
             messageManager.sendMessage(Messages.HELICOPTER_CRASHED)
 
-        # Metadata for image loading - PVL FIXME
-        Object.defineProperties(CopterSprite,
-            {ID: MiscUtils.makeConstantDescriptor(2),
-            width: MiscUtils.makeConstantDescriptor(32),
-            frames: MiscUtils.makeConstantDescriptor(8)})

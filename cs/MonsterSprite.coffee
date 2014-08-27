@@ -8,6 +8,11 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
     diagonals2 = [11, 2, 5, 8]
 
     class MonsterSprite extends BaseSprite
+
+        @ID: MiscUtils.makeConstantDescriptor(5)
+        @width: MiscUtils.makeConstantDescriptor(48)
+        @frames: MiscUtils.makeConstantDescriptor(16)
+
         constructor: (map, spriteManager, x, y) ->
             @init(SpriteConstants.SPRITE_MONSTER, map, spriteManager, x, y)
             @width = 48
@@ -117,8 +122,3 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
 
             SpriteUtils.destroyMapTile(@spriteManager, @map, blockMaps, @x, @y)
 
-        # Metadata for image loading
-        Object.defineProperties(MonsterSprite,
-            {ID: MiscUtils.makeConstantDescriptor(5),
-            width: MiscUtils.makeConstantDescriptor(48),
-            frames: MiscUtils.makeConstantDescriptor(16)})

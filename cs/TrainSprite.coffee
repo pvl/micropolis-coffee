@@ -22,6 +22,11 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
     CANTMOVE = 4
 
     class TrainSprite extends BaseSprite
+
+        @ID: MiscUtils.makeConstantDescriptor(1)
+        @width: MiscUtils.makeConstantDescriptor(32)
+        @frames: MiscUtils.makeConstantDescriptor(5)
+
         constructor: (map, spriteManager, x, y) ->
             @init(SpriteConstants.SPRITE_TRAIN, map, spriteManager, x, y)
             @width = 32
@@ -82,9 +87,3 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
             @frame = 0
             @spriteManager.makeExplosionAt(@x, @y)
             messageManager.sendMessage(Messages.TRAIN_CRASHED)
-
-        # Metadata for image loading
-        Object.defineProperties(TrainSprite,
-            {ID: MiscUtils.makeConstantDescriptor(1),
-            width: MiscUtils.makeConstantDescriptor(32),
-            frames: MiscUtils.makeConstantDescriptor(5)})

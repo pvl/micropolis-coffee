@@ -1,6 +1,10 @@
 define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils'], (BaseSprite, Messages, MiscUtils, Random, SpriteConstants, SpriteUtils) ->
     class AirplaneSprite extends BaseSprite
 
+        @ID: MiscUtils.makeConstantDescriptor(3)
+        @width: MiscUtils.makeConstantDescriptor(48)
+        @frames: MiscUtils.makeConstantDescriptor(11)
+
         xDelta = [0, 0, 6, 8, 6, 0, -6, -8, -6, 8, 8, 8]
         yDelta = [0, -8, -6, 0, 6, 8,  6, 0, -6, 0, 0, 0]
 
@@ -63,11 +67,5 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
             @frame = 0
             @spriteManager.makeExplosionAt(@x, @y)
             messageManager.sendMessage(Messages.PLANE_CRASHED)
-
-    # Metadata for image loading (PVL FIXME)
-    Object.defineProperties(AirplaneSprite,
-        {ID: MiscUtils.makeConstantDescriptor(3),
-        width: MiscUtils.makeConstantDescriptor(48),
-        frames: MiscUtils.makeConstantDescriptor(11)})
 
     return AirplaneSprite

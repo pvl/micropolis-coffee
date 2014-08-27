@@ -1,6 +1,11 @@
 define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile', 'TileUtils'], (BaseSprite, Messages, MiscUtils, Random, SpriteConstants, SpriteUtils, Tile, TileUtils) ->
 
     class ExplosionSprite extends BaseSprite
+
+        @ID: MiscUtils.makeConstantDescriptor(7)
+        @width: MiscUtils.makeConstantDescriptor(48)
+        @frames: MiscUtils.makeConstantDescriptor(6)
+
         constructor: (map, spriteManager, x, y) ->
             @init(SpriteConstants.SPRITE_EXPLOSION, map, spriteManager, x, y)
             @width = 48
@@ -44,8 +49,3 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
                 @startFire(@x - 16, @y + 16)
                 @startFire(@x + 16, @y + 16)
 
-        # Metadata for image loading
-        Object.defineProperties(ExplosionSprite,
-            {ID: MiscUtils.makeConstantDescriptor(7),
-            width: MiscUtils.makeConstantDescriptor(48),
-            frames: MiscUtils.makeConstantDescriptor(6)})

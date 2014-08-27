@@ -4,6 +4,11 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
     yDelta = [-2, 0, 2, 3, 2, 0]
 
     class TornadoSprite extends BaseSprite
+
+        @ID: MiscUtils.makeConstantDescriptor(6)
+        @width: MiscUtils.makeConstantDescriptor(48)
+        @frames: MiscUtils.makeConstantDescriptor(3)
+
         constructor: (map, spriteManager, x, y) ->
             @init(SpriteConstants.SPRITE_TORNADO, map, spriteManager, x, y)
             @width = 48
@@ -55,10 +60,4 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
                 @frame = 0
 
             SpriteUtils.destroyMapTile(@spriteManager, @map, blockMaps, @x, @y)
-
-        # Metadata for image loading
-        Object.defineProperties(TornadoSprite,
-            {ID: MiscUtils.makeConstantDescriptor(6),
-            width: MiscUtils.makeConstantDescriptor(48),
-            frames: MiscUtils.makeConstantDescriptor(3)})
 

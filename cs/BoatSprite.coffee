@@ -12,6 +12,10 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
 
     class BoatSprite extends BaseSprite
 
+        @ID: MiscUtils.makeConstantDescriptor(4)
+        @width: MiscUtils.makeConstantDescriptor(48)
+        @frames: MiscUtils.makeConstantDescriptor(8)
+
         constructor: (map, spriteManager, x, y) ->
             @init(SpriteConstants.SPRITE_SHIP, map, spriteManager, x, y)
             [@width, @height] = [48, 48]
@@ -113,8 +117,3 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
             @spriteManager.makeExplosionAt(@x, @y)
             messageManager.sendMessage(Messages.SHIP_CRASHED)
 
-        #Metadata for image loading
-        Object.defineProperties(BoatSprite,
-            {ID: MiscUtils.makeConstantDescriptor(4),
-            width: MiscUtils.makeConstantDescriptor(48),
-            frames: MiscUtils.makeConstantDescriptor(8)})
