@@ -4,22 +4,22 @@ require ['splashScreen', 'SpriteLoader', 'TileSet', 'TileSetURI'], (SplashScreen
     tileSet = null
 
     spritesLoaded = (spriteImages) ->
-        s = new SplashScreen tileSet, spriteImages
+        s = new SplashScreen(tileSet, spriteImages)
 
-    spriteError = -> alert 'Failed to load sprites'
+    spriteError = -> alert('Failed to load sprites')
 
     loadSprites = ->
-        sl = new SpriteLoader
-        sl.load spritesLoaded, spriteError
+        sl = new SpriteLoader()
+        sl.load(spritesLoaded, spriteError)
 
-    tileSetError = -> alert 'Failed to load tileset!'
+    tileSetError = -> alert('Failed to load tileset!')
 
     loadTileSet = ->
-        tileSet = new TileSet i, loadSprites, tileSetError
+        tileSet = new TileSet(i, loadSprites, tileSetError)
 
-    imgError = -> alert 'Failed to load tile images!'
+    imgError = -> alert('Failed to load tile images!')
 
-    i = new Image
+    i = new Image()
     i.onload = loadTileSet
     i.onerror = imgError
     i.src = 'images/tiles.png'
