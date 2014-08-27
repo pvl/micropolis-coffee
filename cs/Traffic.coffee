@@ -4,7 +4,14 @@ define ['Direction', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'T
     perimX = [-1, 0, 1, 2, 2, 2, 1, 0,-1,-2,-2,-2]
     perimY = [-2,-2,-2,-1, 0, 1, 2, 2, 2, 1, 0,-1]
 
+    MAX_TRAFFIC_DISTANCE = 30
+
     class Traffic
+
+        @ROUTE_FOUND: MiscUtils.makeConstantDescriptor(1)
+        @NO_ROUTE_FOUND: MiscUtils.makeConstantDescriptor(0)
+        @NO_ROAD_FOUND: MiscUtils.makeConstantDescriptor(-1)
+
         constructor: (map, spriteManager) ->
             @_map = map
             @_stack = []
@@ -41,6 +48,7 @@ define ['Direction', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'T
                             sprite.destX = SpriteUtils.worldToPix(pos.x)
                             sprite.destY = SpriteUtils.worldToPix(pos.y)
 
+
         findPerimeterRoad: (pos) ->
             for i in [0...12]
                 xx = pos.x + perimX[i]
@@ -51,3 +59,81 @@ define ['Direction', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'T
                         pos.x = xx
                         pos.y = yy
                         return true
+            return false
+
+
+        tryDrive: (startPos, destFn) ->
+            dirLast = Direction.INVALID
+            drivePos = new this._map.Position(startPos)
+
+            # Maximum distance to try
+            for dist in [0...MAX_TRAFFIC_DISTANCE]
+                dir = this.tryGo(drivePos, dirLast)
+                if dir != Direction.INVALID
+                    drivePos.move(dir)
+                    dirLast = Direction.rotate180(dir)
+
+                    if dist & 1
+                        this._stack.push(new this._map.Position(drivePos))
+
+                    if this.driveDone(drivePos, destFn)
+                        return true
+                else
+                    if this._stack.length > 0
+                        this._stack.pop()
+                        dist += 3
+                    else
+                        return false
+
+            return false
+
+
+        tryGo: (pos, dirLast) ->
+            directions = []
+
+            # Find connections from current position.
+            dir = Direction.NORTH
+            count = 0
+
+            for i in [0...4]
+                if dir != dirLast and TileUtils.isDriveable(this._map.getTileFromMapOrDefault(pos, dir, Tile.DIRT))
+                    # found a road in an allowed direction
+                    directions[i] = dir
+                    count++
+                else
+                    directions[i] = Direction.INVALID
+                dir = Direction.rotate90(dir)
+
+            if count == 0
+                return Direction.INVALID
+
+            if count == 1
+                for i in [0...4]
+                    if directions[i] != Direction.INVALID
+                        return directions[i]
+
+            i = Random.getRandom16() & 3
+            while directions[i] == Direction.INVALID
+                i = (i + 1) & 3
+
+            return directions[i]
+
+
+        driveDone: (pos, destFn) ->
+            if pos.y > 0
+                if destFn(this._map.getTileValue(pos.x, pos.y - 1))
+                    return true
+
+            if pos.x < (this._map.width - 1)
+                if destFn(this._map.getTileValue(pos.x + 1, pos.y))
+                    return true
+
+            if pos.y < (this._map.height - 1)
+                if destFn(this._map.getTileValue(pos.x, pos.y + 1))
+                    return true
+
+            if pos.x > 0
+                if destFn(this._map.getTileValue(pos.x - 1, pos.y))
+                    return true
+
+            return false
