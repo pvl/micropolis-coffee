@@ -52,7 +52,7 @@ define ['GameCanvas', 'GameTools'], (GameCanvas, GameTools) ->
             $('#pauseRequest').click(@speedChangeHandler)
 
 
-        keyUpHandler = (e) =>
+        keyUpHandler: (e) =>
             if e.keyCode == 38
                 @up = false
             if e.keyCode == 40
@@ -63,7 +63,7 @@ define ['GameCanvas', 'GameTools'], (GameCanvas, GameTools) ->
                 @left = false
 
 
-        keyDownHandler = (e) =>
+        keyDownHandler: (e) =>
             handled = false
 
             if e.keyCode == 38
