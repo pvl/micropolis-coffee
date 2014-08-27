@@ -3,18 +3,18 @@ define ['Game', 'mapGenerator', 'SplashCanvas'], (Game, mapGenerator, SplashCanv
     class SplashScreen
         constructor: (@tileSet, @spriteSheet) ->
             @map = mapGenerator()
-            $('#splashGenerate').click(@regenerateMap.bind(this))
-            $('#splashPlay').click(@playMap.bind(this))
+            $('#splashGenerate').click(@regenerateMap)
+            $('#splashPlay').click(@playMap)
             $('.awaitGeneration').toggle()
             @splashCanvas = new SplashCanvas(SplashCanvas.DEFAULT_ID, 'splashContainer')
             @splashCanvas.init(@map, tileSet)
 
-        regenerateMap: ->
+        regenerateMap: =>
             @splashCanvas.clearMap()
             @map = mapGenerator()
             @splashCanvas.paint(@map)
 
-        playMap: ->
+        playMap: =>
             difficulty = $('input[name="difficulty"]:checked').val() - 0
             $('#splashGenerate').off('click')
             $('#splashPlay').off('click')

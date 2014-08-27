@@ -2,36 +2,6 @@ define ['GameCanvas', 'GameTools'], (GameCanvas, GameTools) ->
 
     canvasID = '#' + GameCanvas.DEFAULT_ID
 
-    keyDownHandler = (e) ->
-        handled = false
-
-        if e.keyCode == 38
-            @up = true
-            handled = true
-        else if e.keyCode == 40
-            @down = true
-            handled = true
-        else if e.keyCode == 39
-            @right = true
-            handled = true
-        else if e.keyCode == 37
-            @left = true
-            handled = true
-
-        if handled
-            e.preventDefault()
-
-    keyUpHandler = (e) ->
-        if e.keyCode == 38
-            @up = false
-        if e.keyCode == 40
-            @down = false
-        if e.keyCode == 39
-            @right = false
-        if e.keyCode == 37
-            @left = false
-
-
     class InputStatus
         constructor: (map) ->
             @gameTools = GameTools(map)
@@ -68,8 +38,8 @@ define ['GameCanvas', 'GameTools'], (GameCanvas, GameTools) ->
             @requestedSpeed = null
 
             # Add the listeners
-            $(document).keydown(keyDownHandler.bind(this))
-            $(document).keyup(keyUpHandler.bind(this))
+            $(document).keydown(@keyDownHandler)
+            $(document).keyup(@keyUpHandler)
 
             $(@canvasID).on('mouseenter', @mouseEnterHandler)
             $(@canvasID).on('mouseleave', @mouseLeaveHandler)
@@ -81,10 +51,43 @@ define ['GameCanvas', 'GameTools'], (GameCanvas, GameTools) ->
             $('#disasterRequest').click(@disasterHandler)
             $('#pauseRequest').click(@speedChangeHandler)
 
+
+        keyUpHandler = (e) =>
+            if e.keyCode == 38
+                @up = false
+            if e.keyCode == 40
+                @down = false
+            if e.keyCode == 39
+                @right = false
+            if e.keyCode == 37
+                @left = false
+
+
+        keyDownHandler = (e) =>
+            handled = false
+
+            if e.keyCode == 38
+                @up = true
+                handled = true
+            else if e.keyCode == 40
+                @down = true
+                handled = true
+            else if e.keyCode == 39
+                @right = true
+                handled = true
+            else if e.keyCode == 37
+                @left = true
+                handled = true
+
+            if handled
+                e.preventDefault()
+
+
         clickHandled: ->
             @clickX = -1
             @clickY = -1
             @currentTool.clear()
+
 
         getRelativeCoordinates: (e) ->
             if e.x != undefined and e.y != undefined
@@ -99,9 +102,11 @@ define ['GameCanvas', 'GameTools'], (GameCanvas, GameTools) ->
             y -= canvas.offsetTop
             return {x: x, y: y}
 
+
         mouseEnterHandler: (e) =>
             $(@canvasID).on('mousemove', @mouseMoveHandler)
             $(@canvasID).on('click', @canvasClickHandler)
+
 
         mouseLeaveHandler: (e) =>
             $(@canvasID).off('mousemove')
@@ -110,15 +115,18 @@ define ['GameCanvas', 'GameTools'], (GameCanvas, GameTools) ->
             @mouseX = -1
             @mouseY = -1
 
+
         mouseMoveHandler: (e) =>
             coords = @getRelativeCoordinates(e)
             @mouseX = coords.x
             @mouseY = coords.y
 
+
         canvasClickHandler: (e) =>
             @clickX = @mouseX
             @clickY = @mouseY
             e.preventDefault()
+
 
         toolButtonHandler: (e) =>
             # Remove highlight from last tool button
@@ -136,6 +144,7 @@ define ['GameCanvas', 'GameTools'], (GameCanvas, GameTools) ->
             @toolColour = $(e.target).attr('data-colour')
 
             e.preventDefault()
+
 
         speedChangeHandled: =>
             @speedChangeRequested = false

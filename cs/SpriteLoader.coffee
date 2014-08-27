@@ -4,13 +4,13 @@ define [], ->
             @_loadCallback = null
             @_errorCallback = null
 
-        _loadCB: ->
+        _loadCB: =>
             callback = @_loadCallback
             @_loadCallback = null
             @_errorCallback = null
             callback(@_spriteSheet)
 
-        _errorCB: ->
+        _errorCB: =>
             callback = @_errorCallback
             @_loadCallback = null
             @_errorCallback = null
@@ -22,6 +22,6 @@ define [], ->
             @_errorCallback = errorCallback
 
             @_spriteSheet = new Image()
-            @_spriteSheet.onerror = @_errorCB.bind(this)
-            @_spriteSheet.onload = @_loadCB.bind(this)
+            @_spriteSheet.onerror = @_errorCB
+            @_spriteSheet.onload = @_loadCB
             @_spriteSheet.src = 'images/sprites.png'

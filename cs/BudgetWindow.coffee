@@ -24,51 +24,56 @@ define [], ->
         sourceElem = $('#taxRate')[0]
         $(elem).text(['Tax rate: ', sourceElem.value, '%'].join(''))
 
-    resetItems = (e) ->
-        for i in [0...spendKeys.length]
-            original = @['original' + spendKeys[i]]
-            $('#' + spendKeys[i])[0].value = original
-            setSpendRangeText(spendKeys[i], original, @[dataKeys[i]])
-
-        $('#taxRate')[0].value = @originaltaxRate
-        onTaxUpdate()
-        e.preventDefault()
-
-    cancel = (e) ->
-        e.preventDefault()
-        @_callback(true, null)
-
-        toRemove = [budgetResetID, budgetOKID, 'taxRate',
-                    'roadRate', 'fireRate', 'policeRate']
-
-        for i in [0...toRemove.length]
-            $('#' + toRemove[i]).off()
-
-        @_toggleDisplay()
-
-    submit = (e) ->
-        e.preventDefault()
-        # Get element values
-        roadPercent = $('#roadRate')[0].value
-        firePercent = $('#fireRate')[0].value
-        policePercent = $('#policeRate')[0].value
-        taxPercent = $('#taxRate')[0].value
-
-        @_callback(false,
-            { roadPercent: roadPercent, firePercent: firePercent, policePercent: policePercent, taxPercent: taxPercent } )
-
-        toRemove = [budgetResetID, budgetCancelID, 'taxRate',
-                    'roadRate', 'fireRate', 'policeRate']
-
-        for i in [0...toRemove.length]
-            $('#' + toRemove[i]).off()
-
-        @_toggleDisplay()
 
     class BudgetWindow
         constructor: (opacityLayerID, budgetWindowID) ->
             @_opacityLayer =  '#' + opacityLayerID
             @_budgetWindowID = '#' + budgetWindowID
+
+
+        submit: (e) =>
+            e.preventDefault()
+            # Get element values
+            roadPercent = $('#roadRate')[0].value
+            firePercent = $('#fireRate')[0].value
+            policePercent = $('#policeRate')[0].value
+            taxPercent = $('#taxRate')[0].value
+
+            @_callback(false,
+                { roadPercent: roadPercent, firePercent: firePercent, policePercent: policePercent, taxPercent: taxPercent } )
+
+            toRemove = [budgetResetID, budgetCancelID, 'taxRate',
+                        'roadRate', 'fireRate', 'policeRate']
+
+            for i in [0...toRemove.length]
+                $('#' + toRemove[i]).off()
+
+            @_toggleDisplay()
+
+
+        cancel: (e) =>
+            e.preventDefault()
+            @_callback(true, null)
+
+            toRemove = [budgetResetID, budgetOKID, 'taxRate',
+                        'roadRate', 'fireRate', 'policeRate']
+
+            for i in [0...toRemove.length]
+                $('#' + toRemove[i]).off()
+
+            @_toggleDisplay()
+
+
+        resetItems: (e) =>
+            for i in [0...spendKeys.length]
+                original = @['original' + spendKeys[i]]
+                $('#' + spendKeys[i])[0].value = original
+                setSpendRangeText(spendKeys[i], original, @[dataKeys[i]])
+
+            $('#taxRate')[0].value = @originaltaxRate
+            onTaxUpdate()
+            e.preventDefault()
+
 
         _toggleDisplay: ->
             opacityLayer = $(@_opacityLayer)
@@ -84,10 +89,12 @@ define [], ->
             opacityLayer.toggle()
             budgetWindow.toggle()
 
+
         _registerButtonListeners: ->
-            $('#' + budgetResetID).on('click', resetItems.bind(this))
-            $('#' + budgetCancelID).one('click', cancel.bind(this))
-            $('#' + budgetFormID).one('submit', submit.bind(this))
+            $('#' + budgetResetID).on('click', @resetItems)
+            $('#' + budgetCancelID).one('click', @cancel)
+            $('#' + budgetFormID).one('submit', @submit)
+
 
         open: (callback, budgetData) ->
             @_callback = callback

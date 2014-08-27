@@ -11,13 +11,13 @@ define ['MiscUtils'], (MiscUtils) ->
             @_disasterWindowID = '#' + disasterWindowID
             @_requestedDisaster = DisasterWindow.DISASTER_NONE
 
-        cancel: (e) ->
+        cancel: (e) =>
             e.preventDefault()
             $('#' + disasterFormID).off()
             @_toggleDisplay()
             @_callback(DisasterWindow.DISASTER_NONE)
 
-        submit = (e) ->
+        submit = (e) =>
             e.preventDefault()
             # Get element values
             requestedDisaster = $('#' + disasterSelectID)[0].value
@@ -40,8 +40,8 @@ define ['MiscUtils'], (MiscUtils) ->
             disasterWindow.toggle()
 
         _registerButtonListeners: ->
-            $('#' + disasterCancelID).one('click', @cancel.bind(this))
-            $('#' + disasterFormID).one('submit', @submit.bind(this))
+            $('#' + disasterCancelID).one('click', @cancel)
+            $('#' + disasterFormID).one('submit', @submit)
 
         open: (callback) ->
             @_callback = callback
