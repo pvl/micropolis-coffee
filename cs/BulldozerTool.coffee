@@ -17,7 +17,7 @@ define ['BaseTool', 'Messages', 'Random', 'Tile', 'TileUtils', 'ZoneUtils'], (Ba
                 return @TOOLRESULT_FAILED
 
             tile = TileUtils.normalizeRoad(tile.getValue())
-            switch
+            switch tile
                 when Tile.HBRIDGE,Tile.VBRIDGE,Tile.BRWV,Tile.BRWH,Tile.HBRDG0, \
                      Tile.HBRDG1,Tile.HBRDG2,Tile.HBRDG3,Tile.VBRDG0,Tile.VBRDG1, \
                      Tile.VBRDG2,Tile.VBRDG3,Tile.HPOWER,Tile.VPOWER, \
