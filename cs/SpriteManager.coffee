@@ -20,7 +20,7 @@ define ['AirplaneSprite', 'BoatSprite', 'CopterSprite', 'ExplosionSprite', 'Mess
             filteredList = @spriteList.filter (s) ->
                 s.frame != 0 and s.type == type
 
-            if filteredList.length == 0 then null
+            if filteredList.length == 0 then return null
             return filteredList[0]
 
         getSpriteList: -> @spriteList.slice()
