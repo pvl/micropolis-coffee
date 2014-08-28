@@ -1,4 +1,4 @@
-define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile'], (BaseSprite, Messages, MiscUtils, Random, SpriteConstants, SpriteUtils, Tile) ->
+define ['BaseSprite', 'Messages', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile'], (BaseSprite, Messages, Random, SpriteConstants, SpriteUtils, Tile) ->
 
     tileDeltaX = [0,  0,  1,  1,  1,  0, -1, -1, -1]
     tileDeltaY = [0, -1, -1,  0,  1,  1,  1,  0, -1]
@@ -12,9 +12,9 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
 
     class BoatSprite extends BaseSprite
 
-        @ID: MiscUtils.makeConstantDescriptor(4)
-        @width: MiscUtils.makeConstantDescriptor(48)
-        @frames: MiscUtils.makeConstantDescriptor(8)
+        @ID: 4
+        @width: 48
+        @frames: 8
 
         constructor: (map, spriteManager, x, y) ->
             @init(SpriteConstants.SPRITE_SHIP, map, spriteManager, x, y)

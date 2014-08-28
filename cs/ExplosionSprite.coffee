@@ -1,10 +1,10 @@
-define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile', 'TileUtils'], (BaseSprite, Messages, MiscUtils, Random, SpriteConstants, SpriteUtils, Tile, TileUtils) ->
+define ['BaseSprite', 'Messages', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile', 'TileUtils'], (BaseSprite, Messages, Random, SpriteConstants, SpriteUtils, Tile, TileUtils) ->
 
     class ExplosionSprite extends BaseSprite
 
-        @ID: MiscUtils.makeConstantDescriptor(7)
-        @width: MiscUtils.makeConstantDescriptor(48)
-        @frames: MiscUtils.makeConstantDescriptor(6)
+        @ID: 7
+        @width: 48
+        @frames: 6
 
         constructor: (map, spriteManager, x, y) ->
             @init(SpriteConstants.SPRITE_EXPLOSION, map, spriteManager, x, y)

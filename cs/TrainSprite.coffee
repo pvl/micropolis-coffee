@@ -1,4 +1,4 @@
-define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile'], (BaseSprite, Messages, MiscUtils, Random, SpriteConstants, SpriteUtils, Tile) ->
+define ['BaseSprite', 'Messages', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile'], (BaseSprite, Messages, Random, SpriteConstants, SpriteUtils, Tile) ->
 
     tileDeltaX = [  0, 16, 0, -16]
     tileDeltaY = [-16, 0, 16, 0 ]
@@ -23,9 +23,9 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
 
     class TrainSprite extends BaseSprite
 
-        @ID: MiscUtils.makeConstantDescriptor(1)
-        @width: MiscUtils.makeConstantDescriptor(32)
-        @frames: MiscUtils.makeConstantDescriptor(5)
+        @ID: 1
+        @width: 32
+        @frames: 5
 
         constructor: (map, spriteManager, x, y) ->
             @init(SpriteConstants.SPRITE_TRAIN, map, spriteManager, x, y)

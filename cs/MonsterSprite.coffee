@@ -1,4 +1,4 @@
-define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile', 'TileUtils'], (BaseSprite, Messages, MiscUtils, Random, SpriteConstants, SpriteUtils, Tile, TileUtils) ->
+define ['BaseSprite', 'Messages', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile', 'TileUtils'], (BaseSprite, Messages, Random, SpriteConstants, SpriteUtils, Tile, TileUtils) ->
 
     xDelta = [ 2, 2, -2, -2, 0]
     yDelta = [-2, 2, 2, -2, 0]
@@ -9,9 +9,9 @@ define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Spr
 
     class MonsterSprite extends BaseSprite
 
-        @ID: MiscUtils.makeConstantDescriptor(5)
-        @width: MiscUtils.makeConstantDescriptor(48)
-        @frames: MiscUtils.makeConstantDescriptor(16)
+        @ID: 5
+        @width: 48
+        @frames: 16
 
         constructor: (map, spriteManager, x, y) ->
             @init(SpriteConstants.SPRITE_MONSTER, map, spriteManager, x, y)

@@ -1,9 +1,9 @@
-define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils'], (BaseSprite, Messages, MiscUtils, Random, SpriteConstants, SpriteUtils) ->
+define ['BaseSprite', 'Messages', 'Random', 'SpriteConstants', 'SpriteUtils'], (BaseSprite, Messages, Random, SpriteConstants, SpriteUtils) ->
     class AirplaneSprite extends BaseSprite
 
-        @ID: MiscUtils.makeConstantDescriptor(3)
-        @width: MiscUtils.makeConstantDescriptor(48)
-        @frames: MiscUtils.makeConstantDescriptor(11)
+        @ID: 3
+        @width: 48
+        @frames: 11
 
         xDelta = [0, 0, 6, 8, 6, 0, -6, -8, -6, 8, 8, 8]
         yDelta = [0, -8, -6, 0, 6, 8,  6, 0, -6, 0, 0, 0]

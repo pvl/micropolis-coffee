@@ -1,13 +1,13 @@
-define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile'], (BaseSprite, Messages, MiscUtils, Random, SpriteConstants, SpriteUtils, Tile) ->
+define ['BaseSprite', 'Messages', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile'], (BaseSprite, Messages, Random, SpriteConstants, SpriteUtils, Tile) ->
 
     xDelta = [0, 0, 3, 5, 3, 0, -3, -5, -3]
     yDelta = [0, -5, -3, 0, 3, 5, 3, 0, -3]
 
     class CopterSprite extends BaseSprite
 
-        @ID: MiscUtils.makeConstantDescriptor(2)
-        @width: MiscUtils.makeConstantDescriptor(32)
-        @frames: MiscUtils.makeConstantDescriptor(8)
+        @ID: 2
+        @width: 32
+        @frames: 8
 
         constructor: (map, spriteManager, x, y) ->
             @init(SpriteConstants.SPRITE_HELICOPTER, map, spriteManager, x, y)

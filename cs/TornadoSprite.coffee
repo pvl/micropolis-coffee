@@ -1,13 +1,13 @@
-define ['BaseSprite', 'Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils'], (BaseSprite, Messages, MiscUtils, Random, SpriteConstants, SpriteUtils) ->
+define ['BaseSprite', 'Messages', 'Random', 'SpriteConstants', 'SpriteUtils'], (BaseSprite, Messages, Random, SpriteConstants, SpriteUtils) ->
 
     xDelta = [2, 3, 2, 0, -2, -3]
     yDelta = [-2, 0, 2, 3, 2, 0]
 
     class TornadoSprite extends BaseSprite
 
-        @ID: MiscUtils.makeConstantDescriptor(6)
-        @width: MiscUtils.makeConstantDescriptor(48)
-        @frames: MiscUtils.makeConstantDescriptor(3)
+        @ID: 6
+        @width: 48
+        @frames: 3
 
         constructor: (map, spriteManager, x, y) ->
             @init(SpriteConstants.SPRITE_TORNADO, map, spriteManager, x, y)
