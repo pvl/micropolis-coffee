@@ -1,4 +1,4 @@
-define ['MiscUtils'], (MiscUtils) ->
+define [], () ->
     class BlockMap
         constructor: (mapWidth, mapHeight, blockSize, defaultValue) ->
             id = (x) -> x
@@ -15,14 +15,6 @@ define ['MiscUtils'], (MiscUtils) ->
                 mapHeight = sourceMap.height
                 blockSize = sourceMap.blockSize
                 defaultValue = sourceMap.defaultValue
-
-            Object.defineProperties(this,
-                { mapWidth: MiscUtils.makeConstantDescriptor(mapWidth),
-                mapHeight: MiscUtils.makeConstantDescriptor(mapHeight),
-                width: MiscUtils.makeConstantDescriptor(Math.floor((mapWidth  + 1) / blockSize)),
-                height: MiscUtils.makeConstantDescriptor(Math.floor((mapHeight + 1)/ blockSize)),
-                blockSize: MiscUtils.makeConstantDescriptor(blockSize),
-                defaultValue: MiscUtils.makeConstantDescriptor(defaultValue)})
 
             @data = []
 

@@ -33,6 +33,21 @@ define ['MiscUtils', 'Random'], (MiscUtils, Random) ->
         return Math.min(b, 255)
 
     class Evaluation
+
+        @CC_VILLAGE: 'VILLAGE'
+        @CC_TOWN: 'TOWN'
+        @CC_CITY: 'CITY'
+        @CC_CAPITAL: 'CAPITAL'
+        @CC_METROPOLIS: 'METROPOLIS'
+        @CC_MEGALOPOLIS: 'MEGALOPOLIS'
+        @CRIME: 0
+        @POLLUTION: 1
+        @HOUSING: 2
+        @TAXES: 3
+        @TRAFFIC: 4
+        @UNEMPLOYMENT: 5
+        @FIRE: 6
+
         constructor: (gameLevel) ->
             @problemVotes = []
             @problemOrder = []
@@ -243,20 +258,5 @@ define ['MiscUtils', 'Random'], (MiscUtils, Random) ->
                 return -1
             else
                 return @problemVotes[@problemOrder[i]]
-
-    Object.defineProperties(Evaluation,
-        {CC_VILLAGE: MiscUtils.makeConstantDescriptor('VILLAGE'),
-        CC_TOWN: MiscUtils.makeConstantDescriptor('TOWN'),
-        CC_CITY: MiscUtils.makeConstantDescriptor('CITY'),
-        CC_CAPITAL: MiscUtils.makeConstantDescriptor('CAPITAL'),
-        CC_METROPOLIS: MiscUtils.makeConstantDescriptor('METROPOLIS'),
-        CC_MEGALOPOLIS: MiscUtils.makeConstantDescriptor('MEGALOPOLIS'),
-        CRIME: MiscUtils.makeConstantDescriptor(0),
-        POLLUTION: MiscUtils.makeConstantDescriptor(1),
-        HOUSING: MiscUtils.makeConstantDescriptor(2),
-        TAXES: MiscUtils.makeConstantDescriptor(3),
-        TRAFFIC: MiscUtils.makeConstantDescriptor(4),
-        UNEMPLOYMENT: MiscUtils.makeConstantDescriptor(5),
-        FIRE: MiscUtils.makeConstantDescriptor(6)})
 
     return Evaluation

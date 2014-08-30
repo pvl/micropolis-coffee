@@ -1,14 +1,13 @@
-define ['Messages', 'MiscUtils'], (Messages, MiscUtils) ->
+define ['Messages'], (Messages) ->
 
     RLevels = [0.7, 0.9, 1.2]
     FLevels = [1.4, 1.2, 0.8]
 
     class Budget
         constructor: ->
-            Object.defineProperties(this,
-                {MAX_ROAD_EFFECT: MiscUtils.makeConstantDescriptor(32),
-                MAX_POLICESTATION_EFFECT: MiscUtils.makeConstantDescriptor(1000),
-                MAX_FIRESTATION_EFFECT:  MiscUtils.makeConstantDescriptor(1000)})
+            @MAX_ROAD_EFFECT = 32
+            @MAX_POLICESTATION_EFFECT = 1000
+            @MAX_FIRESTATION_EFFECT = 1000
 
             @roadEffect = @MAX_ROAD_EFFECT
             @policeEffect = @MAX_POLICESTATION_EFFECT

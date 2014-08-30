@@ -1,5 +1,5 @@
-define ['BlockMap', 'BlockMapUtils', 'Budget', 'Census', 'Commercial', 'DisasterManager', 'EmergencyServices', 'Evaluate', 'Industrial', 'MapScanner', 'Messages', 'MessageManager', 'MiscTiles', 'MiscUtils', 'PowerManager', 'RepairManager', 'Residential', 'Road', 'SpriteManager', 'Stadia', 'Traffic', 'Transport', 'Valves'], \
-  (BlockMap, BlockMapUtils, Budget, Census, Commercial, DisasterManager, EmergencyServices, Evaluate, Industrial, MapScanner, Messages, MessageManager, MiscTiles, MiscUtils, PowerManager, RepairManager, Residential, Road, SpriteManager, Stadia, Traffic, Transport, Valves) ->
+define ['BlockMap', 'BlockMapUtils', 'Budget', 'Census', 'Commercial', 'DisasterManager', 'EmergencyServices', 'Evaluate', 'Industrial', 'MapScanner', 'Messages', 'MessageManager', 'MiscTiles', 'PowerManager', 'RepairManager', 'Residential', 'Road', 'SpriteManager', 'Stadia', 'Traffic', 'Transport', 'Valves'], \
+  (BlockMap, BlockMapUtils, Budget, Census, Commercial, DisasterManager, EmergencyServices, Evaluate, Industrial, MapScanner, Messages, MessageManager, MiscTiles, PowerManager, RepairManager, Residential, Road, SpriteManager, Stadia, Traffic, Transport, Valves) ->
 
     speedPowerScan = [2, 4, 5]
     speedPollutionTerrainLandValueScan = [2, 7, 17]
@@ -11,6 +11,15 @@ define ['BlockMap', 'BlockMapUtils', 'Budget', 'Census', 'Commercial', 'Disaster
     TAX_FREQUENCY = 48
 
     class Simulation
+
+        @LEVEL_EASY: 0
+        @LEVEL_MED:  1
+        @LEVEL_HARD: 2
+        @SPEED_PAUSED: 0
+        @SPEED_SLOW: 1
+        @SPEED_MED: 2
+        @SPEED_FAST: 3
+
         constructor: (gameMap, gameLevel, speed) ->
             if gameLevel != Simulation.LEVEL_EASY and
                gameLevel != Simulation.LEVEL_MED and
@@ -414,12 +423,3 @@ define ['BlockMap', 'BlockMapUtils', 'Budget', 'Census', 'Commercial', 'Disaster
                 @_messageManager.sendMessage(Messages.DATE_UPDATED,
                                     {month: cityMonth, year: cityYear})
 
-
-        Object.defineProperties(Simulation,
-            {LEVEL_EASY: MiscUtils.makeConstantDescriptor(0),
-            LEVEL_MED:  MiscUtils.makeConstantDescriptor(1),
-            LEVEL_HARD: MiscUtils.makeConstantDescriptor(2),
-            SPEED_PAUSED: MiscUtils.makeConstantDescriptor(0),
-            SPEED_SLOW:  MiscUtils.makeConstantDescriptor(1),
-            SPEED_MED: MiscUtils.makeConstantDescriptor(2),
-            SPEED_FAST: MiscUtils.makeConstantDescriptor(3)})

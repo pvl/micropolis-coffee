@@ -1,4 +1,4 @@
-define ['Direction', 'MiscUtils', 'PositionMaker', 'Tile'], (Direction, MiscUtils, PositionMaker, Tile) ->
+define ['Direction', 'PositionMaker', 'Tile'], (Direction, PositionMaker, Tile) ->
 
     class GameMap
         constructor: (width, height, defaultValue) ->
@@ -30,9 +30,8 @@ define ['Direction', 'MiscUtils', 'PositionMaker', 'Tile'], (Direction, MiscUtil
                     defaultValue = defaultValue.getValue()
 
             @Position = PositionMaker(width, height)
-            Object.defineProperties(this,
-                {width: MiscUtils.makeConstantDescriptor(width),
-                height:MiscUtils.makeConstantDescriptor(height)})
+            @width = width
+            @height = height
 
             @defaultValue = defaultValue
             @_data = []

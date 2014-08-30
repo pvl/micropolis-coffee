@@ -1,4 +1,4 @@
-define ['MiscUtils'], (MiscUtils) ->
+define [], () ->
 
     disasterSelectID = 'disasterSelect'
     disasterCancelID = 'disasterCancel'
@@ -6,6 +6,15 @@ define ['MiscUtils'], (MiscUtils) ->
     disasterFormID = 'disasterForm'
 
     class DisasterWindow
+
+        @DISASTER_NONE: 'None'
+        @DISASTER_MONSTER: 'Monster'
+        @DISASTER_FIRE: 'Fire'
+        @DISASTER_FLOOD: 'Flood'
+        @DISASTER_CRASH: 'Crash'
+        @DISASTER_MELTDOWN: 'Meltdown'
+        @DISASTER_TORNADO: 'Tornado'
+
         constructor: (opacityLayerID, disasterWindowID) ->
             @_opacityLayer =  '#' + opacityLayerID
             @_disasterWindowID = '#' + disasterWindowID
@@ -57,11 +66,3 @@ define ['MiscUtils'], (MiscUtils) ->
             @_registerButtonListeners()
             @_toggleDisplay()
 
-        Object.defineProperties(DisasterWindow,
-            {DISASTER_NONE: MiscUtils.makeConstantDescriptor('None'),
-            DISASTER_MONSTER: MiscUtils.makeConstantDescriptor('Monster'),
-            DISASTER_FIRE: MiscUtils.makeConstantDescriptor('Fire'),
-            DISASTER_FLOOD: MiscUtils.makeConstantDescriptor('Flood'),
-            DISASTER_CRASH: MiscUtils.makeConstantDescriptor('Crash'),
-            DISASTER_MELTDOWN: MiscUtils.makeConstantDescriptor('Meltdown'),
-            DISASTER_TORNADO: MiscUtils.makeConstantDescriptor('Tornado')})
