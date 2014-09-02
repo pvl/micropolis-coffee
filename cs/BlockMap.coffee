@@ -16,6 +16,13 @@ define [], () ->
                 blockSize = sourceMap.blockSize
                 defaultValue = sourceMap.defaultValue
 
+            @mapWidth = mapWidth
+            @mapHeight = mapHeight
+            @width = Math.floor((mapWidth  + 1) / blockSize)
+            @height = Math.floor((mapHeight + 1)/ blockSize)
+            @blockSize = blockSize
+            @defaultValue = defaultValue
+
             @data = []
 
             if (sourceMap)
