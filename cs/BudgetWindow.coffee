@@ -77,12 +77,12 @@ define [], ->
 
         _toggleDisplay: ->
             opacityLayer = $(@_opacityLayer)
-            opacityLayer = opacityLayer.length == 0 ? null : opacityLayer
+            opacityLayer = if opacityLayer.length == 0 then null else opacityLayer
             if opacityLayer == null
                 throw new Error('Node ' + orig + ' not found')
 
             budgetWindow = $(@_budgetWindowID)
-            budgetWindow = budgetWindow.length == 0 ? null : budgetWindow
+            budgetWindow = if budgetWindow.length == 0 then null else budgetWindow
             if budgetWindow == null
                 throw new Error('Node ' + orig + ' not found')
 
@@ -140,8 +140,8 @@ define [], ->
             cashFlow = taxesCollected - @roadFund - @fireFund - @policeFund
             currentFunds = previousFunds + cashFlow
             $('#taxesCollected').text('$' + taxesCollected)
-            $('#cashFlow').text((cashFlow < 0 ? '-$' : '$') + cashFlow)
-            $('#previousFunds').text((previousFunds < 0 ? '-$' : '$') + previousFunds)
+            $('#cashFlow').text((if cashFlow < 0 then '-$' else '$') + cashFlow)
+            $('#previousFunds').text((if previousFunds < 0 then '-$' else '$') + previousFunds)
             $('#currentFunds').text('$' + currentFunds)
 
             @_registerButtonListeners()

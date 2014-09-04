@@ -36,12 +36,12 @@ define [], () ->
 
         _toggleDisplay: ->
             opacityLayer = $(@_opacityLayer)
-            opacityLayer = opacityLayer.length == 0 ? null : opacityLayer
+            opacityLayer = if opacityLayer.length == 0 then null else opacityLayer
             if opacityLayer == null
                 throw new Error('Node ' + orig + ' not found')
 
             disasterWindow = $(@_disasterWindowID)
-            disasterWindow = disasterWindow.length == 0 ? null : disasterWindow
+            disasterWindow = if disasterWindow.length == 0 then null else disasterWindow
             if disasterWindow == null
                 throw new Error('Node ' + orig + ' not found')
 

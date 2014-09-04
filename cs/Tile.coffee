@@ -87,12 +87,12 @@ define [], () ->
         toString: ->
             value = @getValue()
             s = 'Tile# ' + value
-            s += @isCombustible() ? ' burning' : ''
-            s += @isPowered() ? ' powered' : ''
-            s += @isAnimated() ? ' animated' : ''
-            s += @isConductive() ? ' conductive' : ''
-            s += @isZone() ? ' zone' : ''
-            s += @isBulldozable() ? ' bulldozeable' : ''
+            s += if @isCombustible() then ' burning' else ''
+            s += if @isPowered() then ' powered' else ''
+            s += if @isAnimated() then ' animated' else ''
+            s += if @isConductive() then ' conductive' else ''
+            s += if @isZone() then ' zone' else ''
+            s += if @isBulldozable() then ' bulldozeable' else ''
 
         # Bit-masks for statusBits
         Tile.POWERBIT  = 0x8000  # bit 15, tile has power.
