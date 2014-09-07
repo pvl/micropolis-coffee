@@ -27,7 +27,7 @@ define [], ->
         # when dir >= END
         increment90: (dir) ->
             throw new TypeError() if arguments.length < 1
-            return @increment45 dir, 2
+            return @increment45(dir, 2)
 
         # Move direction clockwise by 45 degrees, taking the direction modulo 8
         # if necessary to force it into valid bounds. Has no effect on INVALID.
@@ -42,15 +42,12 @@ define [], ->
         # if necessary to force it into valid bounds. Has no effect on INVALID.
         rotate90: (dir) ->
             throw new TypeError() if arguments.length < 1
-            return @rotate45 dir, 2
+            return @rotate45(dir, 2)
 
         # Move direction clockwise by 180 degrees, taking the direction modulo 8
         # if necessary to force it into valid bounds. Has no effect on INVALID.
         rotate180: (dir) ->
             throw new TypeError() if arguments.length < 1
-            return @rotate45 dir, 4
-
-    if Object.freeze and typeof(Object.freeze) == 'function'
-        Object.freeze Direction
+            return @rotate45(dir, 4)
 
     return Direction
