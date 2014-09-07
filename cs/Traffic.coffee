@@ -8,9 +8,9 @@ define ['Direction', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'T
 
     class Traffic
 
-        @ROUTE_FOUND: MiscUtils.makeConstantDescriptor(1)
-        @NO_ROUTE_FOUND: MiscUtils.makeConstantDescriptor(0)
-        @NO_ROAD_FOUND: MiscUtils.makeConstantDescriptor(-1)
+        @ROUTE_FOUND: 1
+        @NO_ROUTE_FOUND: 0
+        @NO_ROAD_FOUND: -1
 
         constructor: (map, spriteManager) ->
             @_map = map
@@ -64,23 +64,23 @@ define ['Direction', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'T
 
         tryDrive: (startPos, destFn) ->
             dirLast = Direction.INVALID
-            drivePos = new this._map.Position(startPos)
+            drivePos = new @_map.Position(startPos)
 
             # Maximum distance to try
             for dist in [0...MAX_TRAFFIC_DISTANCE]
-                dir = this.tryGo(drivePos, dirLast)
+                dir = @tryGo(drivePos, dirLast)
                 if dir != Direction.INVALID
                     drivePos.move(dir)
                     dirLast = Direction.rotate180(dir)
 
                     if dist & 1
-                        this._stack.push(new this._map.Position(drivePos))
+                        @_stack.push(new @_map.Position(drivePos))
 
-                    if this.driveDone(drivePos, destFn)
+                    if @driveDone(drivePos, destFn)
                         return true
                 else
-                    if this._stack.length > 0
-                        this._stack.pop()
+                    if @_stack.length > 0
+                        @_stack.pop()
                         dist += 3
                     else
                         return false
@@ -96,7 +96,7 @@ define ['Direction', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'T
             count = 0
 
             for i in [0...4]
-                if dir != dirLast and TileUtils.isDriveable(this._map.getTileFromMapOrDefault(pos, dir, Tile.DIRT))
+                if dir != dirLast and TileUtils.isDriveable(@_map.getTileFromMapOrDefault(pos, dir, Tile.DIRT))
                     # found a road in an allowed direction
                     directions[i] = dir
                     count++
@@ -121,19 +121,19 @@ define ['Direction', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'T
 
         driveDone: (pos, destFn) ->
             if pos.y > 0
-                if destFn(this._map.getTileValue(pos.x, pos.y - 1))
+                if destFn(@_map.getTileValue(pos.x, pos.y - 1))
                     return true
 
-            if pos.x < (this._map.width - 1)
-                if destFn(this._map.getTileValue(pos.x + 1, pos.y))
+            if pos.x < (@_map.width - 1)
+                if destFn(@_map.getTileValue(pos.x + 1, pos.y))
                     return true
 
-            if pos.y < (this._map.height - 1)
-                if destFn(this._map.getTileValue(pos.x, pos.y + 1))
+            if pos.y < (@_map.height - 1)
+                if destFn(@_map.getTileValue(pos.x, pos.y + 1))
                     return true
 
             if pos.x > 0
-                if destFn(this._map.getTileValue(pos.x - 1, pos.y))
+                if destFn(@_map.getTileValue(pos.x - 1, pos.y))
                     return true
 
             return false
