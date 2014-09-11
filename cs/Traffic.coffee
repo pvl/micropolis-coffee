@@ -1,5 +1,5 @@
-define ['Direction', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile', 'TileUtils'], \
-  (Direction, MiscUtils, Random, SpriteConstants, SpriteUtils, Tile, TileUtils) ->
+define ['Direction', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile', 'TileUtils'], \
+  (Direction, Random, SpriteConstants, SpriteUtils, Tile, TileUtils) ->
 
     perimX = [-1, 0, 1, 2, 2, 2, 1, 0,-1,-2,-2,-2]
     perimY = [-2,-2,-2,-1, 0, 1, 2, 2, 2, 1, 0,-1]
@@ -67,24 +67,21 @@ define ['Direction', 'MiscUtils', 'Random', 'SpriteConstants', 'SpriteUtils', 'T
             drivePos = new @_map.Position(startPos)
 
             # Maximum distance to try
-            for dist in [0...MAX_TRAFFIC_DISTANCE]
+            dist = 0
+            while dist < MAX_TRAFFIC_DISTANCE
                 dir = @tryGo(drivePos, dirLast)
                 if dir != Direction.INVALID
                     drivePos.move(dir)
                     dirLast = Direction.rotate180(dir)
-
-                    if dist & 1
-                        @_stack.push(new @_map.Position(drivePos))
-
-                    if @driveDone(drivePos, destFn)
-                        return true
+                    @_stack.push(new @_map.Position(drivePos)) if dist & 1
+                    return true if @driveDone(drivePos, destFn)
                 else
                     if @_stack.length > 0
                         @_stack.pop()
                         dist += 3
                     else
                         return false
-
+                dist++
             return false
 
 
