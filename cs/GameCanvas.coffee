@@ -210,7 +210,8 @@ define ['AnimationManager', 'GameMap', 'MouseBox', 'Tile', 'TileSet'], \
                 y = x.y
                 x = x.x
 
-            if x == undefined or y == undefined or x < @minX or y < @minY or                x > (@maxX + @_totalTilesInViewX - 1) ||
+            if x == undefined or y == undefined or x < @minX or
+               y < @minY or x > (@maxX + @_totalTilesInViewX - 1) or
                y > (@maxY + @_totalTilesInViewY - 1)
                 throw e
 
@@ -218,8 +219,7 @@ define ['AnimationManager', 'GameMap', 'MouseBox', 'Tile', 'TileSet'], \
                y < @_originY or y >= @_originY + @_totalTilesInViewY
                 return null
 
-            {x: (x - @_originX) * @_tileSet.tileWidth,
-            y: (y - @_originY) * @_tileSet.tileWidth}
+            {x: (x - @_originX) * @_tileSet.tileWidth, y: (y - @_originY) * @_tileSet.tileWidth}
 
 
         changeTileSet: (tileSet) ->
