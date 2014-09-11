@@ -1,6 +1,6 @@
 #PVL FIXME, this should be handled using inheritance
 
-define ['Messages', 'MiscUtils', 'Tile', 'TileUtils', 'WorldEffects'], (Messages, MiscUtils, Tile, TileUtils, WorldEffects) ->
+define ['Messages', 'Tile', 'TileUtils', 'WorldEffects'], (Messages, Tile, TileUtils, WorldEffects) ->
 
     class BaseTool
 
@@ -14,8 +14,7 @@ define ['Messages', 'MiscUtils', 'Tile', 'TileUtils', 'WorldEffects'], (Messages
 
         init: (cost, map, shouldAutoBulldoze, isDraggable) ->
             isDraggable = isDraggable or false
-            #FIXME PVL
-            Object.defineProperty(this, 'toolCost', MiscUtils.makeConstantDescriptor(cost))
+            @toolCost = cost
             @result = null
             @isDraggable = isDraggable
             @_shouldAutoBulldoze = shouldAutoBulldoze

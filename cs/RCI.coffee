@@ -1,6 +1,9 @@
-define ['MiscUtils'], (MiscUtils) ->
+define [], () ->
 
     class RCI
+
+        @DEFAULT_ID: 'RCICanvas'
+
         constructor: (id, parentNode) ->
             e = new Error('Invalid parameter')
             if arguments.length < 1
@@ -32,6 +35,7 @@ define ['MiscUtils'], (MiscUtils) ->
             # is 1 unit of padding
             @_canvasHeight = (2 * @_buckets + 3 * @_padding) * @_rectSize
 
+            #PVL FIXME set the calculated width
             @_canvas = $('<canvas></canvas>', {id: id})[0]
             # Remove any existing element with the same id
             elems = $('#' + id)
@@ -98,4 +102,4 @@ define ['MiscUtils'], (MiscUtils) ->
                 @_drawValue(ctx, i, values[i])
                 @_drawLabel(ctx, i)
 
-        Object.defineProperty(RCI, 'DEFAULT_ID', MiscUtils.makeConstantDescriptor('RCICanvas'))
+

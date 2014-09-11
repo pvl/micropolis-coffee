@@ -1,4 +1,4 @@
-define ['Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Tile', 'TileUtils', 'ZoneUtils'], (Messages, MiscUtils, Random, SpriteConstants, Tile, TileUtils, ZoneUtils) ->
+define ['Messages', 'Random', 'SpriteConstants', 'Tile', 'TileUtils', 'ZoneUtils'], (Messages, Random, SpriteConstants, Tile, TileUtils, ZoneUtils) ->
 
     DisChance = [4800, 2400, 60]
     Dx = [ 0, 1, 0, -1]
@@ -18,9 +18,8 @@ define ['Messages', 'MiscUtils', 'Random', 'SpriteConstants', 'Tile', 'TileUtils
 
             @_floodCount = 0
 
-            # TODO enable disasters  PVL FIXME
-            Object.defineProperty(this, 'disastersEnabled',
-                                  MiscUtils.makeConstantDescriptor(false))
+            # TODO enable disasters
+            @disastersEnabled = false
 
         doDisasters: (census, messageManager) ->
             @_floodCount-- if @_floodCount

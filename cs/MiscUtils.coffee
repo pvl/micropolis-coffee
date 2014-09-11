@@ -6,9 +6,6 @@ define [], ->
             return max
         return value
 
-    makeConstantDescriptor = (value) ->
-        { configurable: false, enumerable: false, writeable: false, value: value }
-
     mixOf = (base, mixins...) ->
         class Mixed extends base
             for mixin in mixins by -1 #earlier mixins override later ones
@@ -18,5 +15,4 @@ define [], ->
 
     MiscUtils =
         clamp: clamp
-        makeConstantDescriptor: makeConstantDescriptor
         mixOf: mixOf

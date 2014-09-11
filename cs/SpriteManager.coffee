@@ -1,5 +1,5 @@
-define ['AirplaneSprite', 'BoatSprite', 'CopterSprite', 'ExplosionSprite', 'Messages', 'MiscUtils', 'MonsterSprite', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile', 'TornadoSprite', 'TrainSprite'], \
-  (AirplaneSprite, BoatSprite, CopterSprite, ExplosionSprite, Messages, MiscUtils, MonsterSprite, Random, SpriteConstants, SpriteUtils, Tile, TornadoSprite, TrainSprite) ->
+define ['AirplaneSprite', 'BoatSprite', 'CopterSprite', 'ExplosionSprite', 'Messages', 'MonsterSprite', 'Random', 'SpriteConstants', 'SpriteUtils', 'Tile', 'TornadoSprite', 'TrainSprite'], \
+  (AirplaneSprite, BoatSprite, CopterSprite, ExplosionSprite, Messages, MonsterSprite, Random, SpriteConstants, SpriteUtils, Tile, TornadoSprite, TrainSprite) ->
 
     class SpriteManager
 
